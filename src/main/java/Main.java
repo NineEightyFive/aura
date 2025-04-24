@@ -14,6 +14,7 @@ public class Main {
                 ef.setTitle("Echo Master");
                 ef.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 ef.setVisible(true);
+                System.out.println(ef);
 	}
 
 	public static void main(String[] args) {
