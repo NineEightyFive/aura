@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>echomaster</groupId>
+<artifactId>echomaster</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>EchoMaster</name>
+ 
+  <!-- Dependencies for JAVE2 -->
+<dependencies>
+<dependency>
+<groupId>ws.schild</groupId>
+<artifactId>jave-all-deps</artifactId>
+<version>3.5.0</version> <!-- Replace with the latest version if necessary -->
+</dependency>
+</dependencies>
+</project>
