@@ -1,4 +1,5 @@
-
+import ws.schild.jave.Encoder;
+import ws.schild.jave.MultimediaObject;
 
 public class AudioFile {
 	
