@@ -1,4 +1,5 @@
-
+import ws.schild.jave.Encoder;
+import ws.schild.jave.MultimediaObject;
 
 public class Main {
 	
@@ -8,6 +9,6 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("hi");
+		System.out.println("Attempting to initialize EchoMaster...");
 	}
 }

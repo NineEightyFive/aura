@@ -6,7 +6,10 @@
 <artifactId>echomaster</artifactId>
 <version>0.0.1-SNAPSHOT</version>
 <name>EchoMaster</name>
- 
+ <properties>         
+ <maven.compiler.source>17</maven.compiler.source>         
+ <maven.compiler.target>17</maven.compiler.target>     
+ </properties>
   <!-- Dependencies for JAVE2 -->
 <dependencies>
 <dependency>
