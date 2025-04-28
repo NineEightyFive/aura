@@ -25,11 +25,13 @@ public class ConvertEngine {
 																			
 				//Audio Attributes                                       
 				AudioAttributes audio = new AudioAttributes();              
-				audio.setCodec(AudioAttributes.DIRECT_STREAM_COPY);                               
+				audio.setCodec(AudioAttributes.DIRECT_STREAM_COPY);
+                                /* No idea how to quickly fix this, -Dan
 				audio.setBitRate(audio.getBitRate());                                   
 				audio.setChannels(audio.getChannels());                                       
 				audio.setSamplingRate(audio.getSamplingRate());                               
-																			
+				*/
+                                
 				//Encoding attributes                                       
 				EncodingAttributes attrs = new EncodingAttributes();        
 				attrs.setOutputFormat(files[i].getNewFormat());                                     
@@ -43,7 +45,9 @@ public class ConvertEngine {
 				filesDone++;
 			} catch(Exception e) {
 				System.err.println("Exception occured when converting file... "+e);
-				UI.sendNotification("error","Error when converting file: "+e);
+				/* No idea how to quickly fix this, -Dan
+                                UI.sendNotification("error","Error when converting file: "+e);
+                                */
 			}
 
 		}

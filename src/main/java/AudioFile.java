@@ -7,6 +7,7 @@ import ws.schild.jave.info.MultimediaInfo;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import ws.schild.jave.EncoderException;
 
 /*
  * 
@@ -29,10 +30,10 @@ public class AudioFile {
 
 
 
-		if (key.equals("samplingrate")) return info.getAudio().getSamplingRate();
+		if (key.equals("samplingrate")) return String.valueOf(info.getAudio().getSamplingRate());
 		if (key.equals("decoder")) return info.getAudio().getDecoder();
-		if (key.equals("bitrate")) return info.getAudio().getBitRate();
-		if (key.equals("channels")) return info.getAudio().getChannels();
+		if (key.equals("bitrate")) return String.valueOf(info.getAudio().getBitRate());
+		if (key.equals("channels")) return String.valueOf(info.getAudio().getChannels());
 		
 
 		return null; // Would return data
@@ -62,7 +63,7 @@ public class AudioFile {
 		return info;
 	}
 
-	public AudioFile(String path) {
+	public AudioFile(String path) throws EncoderException {
 		file = new File(path);
 		mmObject = new MultimediaObject(file);
 		info = mmObject.getInfo();
