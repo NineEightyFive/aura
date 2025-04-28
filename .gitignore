@@ -4,3 +4,4 @@ target/classes/UI/EchoFrame.class
 target/classes/MetaLink.class
 target/classes/UI/EchoFrame.class
 *.class
+/target
