@@ -16,16 +16,18 @@ import javax.swing.JComboBox;
  */
 public class EchoFrame extends JFrame{
     public EchoFrame(){
+        String[] metadataKeys = {
+            "author",
+            "title",
+            "date"
+        };
         String[] defaultOptions = {
             "<keep>",
             "<clear>"
         };
-        JTextField authorLabel = new JTextField("Author");
-        authorLabel.setEditable(false);
-        JComboBox authorField = new JComboBox(defaultOptions);
-        authorField.setEditable(true);
+        
         this.setLayout(new GridBagLayout());
-        this.add(authorLabel);
-        this.add(authorField);
+        MetadataPanel panel = new MetadataPanel((String[])metadataKeys, (String[])defaultOptions);
+        this.add(panel);
     }
 }
