@@ -5,6 +5,9 @@ public class MetaLink {
 	private AudioFile reference;
 	
 	public String getMeta(String type) {
+
+		Map<String,String> allMeta = reference.getMMInfo().getMetadata(); // ask bro
+
 		return null;
 	}
 	

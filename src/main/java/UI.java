@@ -1,5 +1,3 @@
-
-
 public class UI {
 	
 	AudioFile[] files;

@@ -1,5 +1,18 @@
+import java.io.File;
+
 import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
+import ws.schild.jave.info.MultimediaInfo;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
+/*
+ * 
+ * MultimediaObject mmObject= new MultimediaObject(myFile);
+MultimediaInfo infos= mmObject.getInfo();
+ */
 
 @SuppressWarnings("unused")
 public class AudioFile {
@@ -7,9 +20,21 @@ public class AudioFile {
 	String format;
 	MetaLink metaData;
 	String newFormat;
-	String path;
+	File file;
+	MultimediaObject mmObject;
+	MultimediaInfo info;
+
 	
 	public String getSingleMetadata(String key) {
+
+
+
+		if (key.equals("samplingrate")) return info.getAudio().getSamplingRate();
+		if (key.equals("decoder")) return info.getAudio().getDecoder();
+		if (key.equals("bitrate")) return info.getAudio().getBitRate();
+		if (key.equals("channels")) return info.getAudio().getChannels();
+		
+
 		return null; // Would return data
 	};
 	
@@ -26,10 +51,21 @@ public class AudioFile {
 	}
 
 	public String getPath() {
-		return path;
+		return file.getPath();
 	}
 
 	public String getNewFormat() {
 		return newFormat;
 	}
+
+	public MultimediaInfo getMMInfo() {
+		return info;
+	}
+
+	public AudioFile(String path) {
+		file = new File(path);
+		mmObject = new MultimediaObject(file);
+		info = mmObject.getInfo();
+	}
+
 }

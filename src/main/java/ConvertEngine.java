@@ -14,6 +14,8 @@ public class ConvertEngine {
 	
 	public AudioFile[] convert(AudioFile[] files) {
 
+		int filesDone = 0;
+
 		for(int i=0; i<files.length; i++) {
 
 			try {
@@ -23,10 +25,10 @@ public class ConvertEngine {
 																			
 				//Audio Attributes                                       
 				AudioAttributes audio = new AudioAttributes();              
-				audio.setCodec("libmp3lame");                               
-				audio.setBitRate(128000);                                   
-				audio.setChannels(2);                                       
-				audio.setSamplingRate(44100);                               
+				audio.setCodec(AudioAttributes.DIRECT_STREAM_COPY);                               
+				audio.setBitRate(audio.getBitRate());                                   
+				audio.setChannels(audio.getChannels());                                       
+				audio.setSamplingRate(audio.getSamplingRate());                               
 																			
 				//Encoding attributes                                       
 				EncodingAttributes attrs = new EncodingAttributes();        
@@ -38,9 +40,10 @@ public class ConvertEngine {
 				Encoder encoder = new Encoder();                            
 				encoder.encode(new MultimediaObject(source), target, attrs);
 
-
+				filesDone++;
 			} catch(Exception e) {
 				System.err.println("Exception occured when converting file... "+e);
+				UI.sendNotification("error","Error when converting file: "+e);
 			}
 
 		}
