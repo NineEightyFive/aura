@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
 
+@SuppressWarnings("unused")
 public class Main {
 	
 	public static void init() {

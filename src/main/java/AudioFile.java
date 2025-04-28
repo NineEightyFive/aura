@@ -1,6 +1,7 @@
 import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
 
+@SuppressWarnings("unused")
 public class AudioFile {
 	
 	String format;
@@ -22,5 +23,13 @@ public class AudioFile {
 	
 	public MetaLink getMetaLink() {
 		return metaData;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public String getNewFormat() {
+		return newFormat;
 	}
 }

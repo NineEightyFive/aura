@@ -1,5 +1,5 @@
 
-
+@SuppressWarnings("unused")
 public class MetaLink {
 	
 	private AudioFile reference;
