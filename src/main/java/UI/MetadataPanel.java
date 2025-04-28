@@ -20,7 +20,7 @@ public class MetadataPanel extends JPanel{
     private JTextField label;
     private JComboBox metadata;*/
     
-    
+
     
     private void metadataChangedByUI(String key, String value){
         //TODO: integrate with rest of EchoMaster
@@ -28,7 +28,7 @@ public class MetadataPanel extends JPanel{
     }
     
     public MetadataPanel(String[] keys, String[] defaults){
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         for (String key: keys){
             JPanel subPanel = new JPanel();
             subPanel.setLayout(new FlowLayout());
@@ -44,7 +44,9 @@ public class MetadataPanel extends JPanel{
         }
     }
     
-    
+        public static void doesThisExist(){
+        System.out.println("The MetadataPanel class exists");
+    }
     
     public class MetadataComboBoxListener implements ActionListener {
         private final String key;

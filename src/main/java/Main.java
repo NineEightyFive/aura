@@ -1,4 +1,6 @@
 import UI.EchoFrame;
+import UI.MetadataPanel;
+
 import javax.swing.JFrame;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
@@ -20,6 +22,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("Attempting to initialize EchoMaster...");
+                MetadataPanel.doesThisExist();//Somehow it didn't exist until I did this
 		init();
 	}
 }

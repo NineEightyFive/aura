@@ -5,11 +5,13 @@
 package UI;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.GridBagLayout;
+import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
+
 /**
  *
  * @author Dan Bennett-Jeffreys
