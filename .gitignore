@@ -1,0 +1,6 @@
+target/test-classes/.netbeans_automatic_build
+target/classes/UI/MetadataPanel.class
+target/classes/UI/EchoFrame.class
+target/classes/MetaLink.class
+target/classes/UI/EchoFrame.class
+*.class
