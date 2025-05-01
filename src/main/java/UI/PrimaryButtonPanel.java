@@ -4,6 +4,9 @@
  */
 package UI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Dan Bennett-Jeffreys
@@ -15,8 +18,64 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
      */
     public PrimaryButtonPanel() {
         initComponents();
+        jAddFile.addActionListener(new AddFileListener());
+        jAddFldr.addActionListener(new RemoveFolderListener());
+        jClrAll.addActionListener(new ClearAllListener());
+        jRmvFile.addActionListener(new RemoveFileListener());
+        jRmvFldr.addActionListener(new RemoveFolderListener());
+        jStart.addActionListener(new StartListener());
+        jStop.addActionListener(new StopListener());
     }
 
+    public class AddFileListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+    
+    public class RemoveFileListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+    
+    public class ClearAllListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+    
+    public class AddFolderListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+    
+    public class RemoveFolderListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+    
+    public class StartListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+    
+    public class StopListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
