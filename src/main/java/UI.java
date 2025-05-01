@@ -30,7 +30,7 @@ public class UI {
 
 		try {
 		files.add(new AudioFile(f.getPath()));
-		UI.sendNotification("gen", "File Added To List");
+		UI.sendNotification("gen", "File "+f.getName()+" Added To List");
 		} catch(Exception e) {
 System.out.println("womp womp");
 		}

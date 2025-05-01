@@ -58,8 +58,8 @@ public class AudioFile {
 		return newFormat;
 	}
 
-	public String setNewFormat() {
-		return newFormat;
+	public void setNewFormat(String format) {
+		newFormat = format;
 	}
 
 	public MultimediaInfo getMMInfo() {
