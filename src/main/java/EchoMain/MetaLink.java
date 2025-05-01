@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
+package EchoMain;
 
 @SuppressWarnings("unused")
 public class MetaLink {

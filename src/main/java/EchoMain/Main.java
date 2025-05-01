@@ -1,3 +1,5 @@
+package EchoMain;
+
 import UI.EchoFrame;
 import UI.MetadataPanel;
 

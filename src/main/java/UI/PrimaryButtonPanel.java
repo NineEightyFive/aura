@@ -6,6 +6,7 @@ package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import EchoMain.*;
 
 /**
  *
@@ -30,7 +31,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class AddFileListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            Uploader.openFileBrowser();
         }
     }
     
