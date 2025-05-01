@@ -32,14 +32,18 @@ public class AudioFile {
 	 */
 	public String getSingleAudioMetadata(String key) {
 		if (key.equals("samplingrate")) return String.valueOf(info.getAudio().getSamplingRate());
-		if (key.equals("decoder")) return info.getAudio().getDecoder();
-		if (key.equals("bitrate")) return String.valueOf(info.getAudio().getBitRate());
-		if (key.equals("channels")) return String.valueOf(info.getAudio().getChannels());
+		else if (key.equals("decoder")) return info.getAudio().getDecoder();
+		else if (key.equals("bitrate")) return String.valueOf(info.getAudio().getBitRate());
+		else if (key.equals("channels")) return String.valueOf(info.getAudio().getChannels());
 		return null; // Would return data
 	};
 	
 	public void setSingleAudioMetadata(String key, String value) {
-		// TBD
+		if (key.equals("samplingrate")) info.getAudio().setSamplingRate(0);
+		else if (key.equals("decoder")) info.getAudio().setDecoder(value);
+		else if (key.equals("bitrate")) info.getAudio().setBitRate(0);
+		else if (key.equals("channels")) info.getAudio().setChannels(0);
+
 	};
 	
 	public MetaLink getMetaLink() {
@@ -51,6 +55,10 @@ public class AudioFile {
 	}
 
 	public String getNewFormat() {
+		return newFormat;
+	}
+
+	public String setNewFormat() {
 		return newFormat;
 	}
 

@@ -22,7 +22,8 @@ public class UI {
 	}
 	
 	public void doConvert(ArrayList<AudioFile> filesToConvert) {
-		
+		System.out.println("-- STARTING CONVERSION PROCESS --");
+		ConvertEngine.convert(filesToConvert);
 	}
 	
 	public static void doUpload(File f) {

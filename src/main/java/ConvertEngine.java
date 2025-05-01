@@ -6,6 +6,12 @@ import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.encode.EncodingAttributes;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 public class ConvertEngine {
 	
@@ -22,7 +28,8 @@ public class ConvertEngine {
 			try {
 
 				File source = new File(af.getPath());		                 
-				File target = new File("file path");                         
+				File target = new File();     
+				//(Paths.get(af.getPath()).getParent())                    
 																			
 				//Audio Attributes                                       
 				AudioAttributes audio = new AudioAttributes();              
@@ -54,4 +61,13 @@ public class ConvertEngine {
 
 		return null; // Would return an array of converted audiofiles
 	}
+	public static void main(String[] args) {
+		System.out.println("I will test the converter");
+            ArrayList<AudioFile> fil = new ArrayList<AudioFile>();
+			fil.add(new AudioFile("C:/Users/Owain Lucas/Downloads/500+Chunks.mp3"));
+			fil.get(0.).setSingleAudioMetadata("format","m4a");
+	}
+
+}
+
 }

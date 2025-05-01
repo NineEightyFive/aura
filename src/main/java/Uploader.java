@@ -20,9 +20,17 @@ public class Uploader {
 	String type;
 	
 
-private static final String[] allowedTypes = {"wav","flac","mp3","m4a","mp4","mkv","aiff","aac","ogg","wma"};
+public static final String[] allowedTypes = {"wav","flac","mp3","m4a","mp4","mkv","aiff","aac","ogg","wma"};
 
-private static boolean isAudioFile(File file) {
+public static boolean isValidFormat(String ext) {
+	for(int i=0; i<allowedTypes.length;i++) {
+		//System.out.println(ext+" audio/"+allowedTypes[i]);
+		if (ext.equals(allowedTypes[i])) return true;
+	}
+	return false; // Not an audio file
+}
+
+public static boolean isAudioFile(File file) {
 	
 	try {
 	String ext = Files.probeContentType(Paths.get(file.getPath()));
