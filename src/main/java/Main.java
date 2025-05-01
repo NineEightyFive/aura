@@ -9,7 +9,6 @@ import ws.schild.jave.MultimediaObject;
 public class Main {
 	
 	public static void init() {
-		System.out.println("Ayo");
 		// Run initalization of program, start UI, etc.
 		// This will run when the app is started.
                 EchoFrame ef = new EchoFrame();

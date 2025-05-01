@@ -13,7 +13,7 @@ public class ConvertEngine {
 		return null; // Returns audiofile with new metadata, run after file is converted.
 	}
 	
-	public ArrayList<AudioFile> convert(ArrayList<AudioFile> files) {
+	public static ArrayList<AudioFile> convert(ArrayList<AudioFile> files) {
 
 		int filesDone = 0;
 

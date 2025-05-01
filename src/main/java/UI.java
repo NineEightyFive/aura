@@ -35,15 +35,4 @@ System.out.println("womp womp");
 		}
 	}
 	
-	public boolean modifyMeta(AudioFile file, String param, String value) {
-		return true; // true if successful, otherwise unsuccessful
-	}
-	
-	public boolean modifyMeta(AudioFile file, String param, int value) {
-		return true; // true if successful, otherwise unsuccessful
-	}
-	
-	public boolean modifyFile(AudioFile file, String param, String value) {
-		return true; // true if successful, otherwise unsuccessful
-	}
 }
