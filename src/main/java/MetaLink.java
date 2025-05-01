@@ -1,4 +1,4 @@
-
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -7,19 +7,15 @@ public class MetaLink {
 	
 	private AudioFile reference;
 	
-	public String getMeta(String type) {
-
-		Map<String,String> allMeta = reference.getMMInfo().getMetadata(); // ask bro
-
+	public static String getMeta(String type) {
+		Map<String,String> allMeta = reference.getMMInfo().getMetadata();
+		if(!allMeta.containsKey(type)) return allMeta.get(type);
 		return null;
 	}
-	
-	public int applyMeta(String type, int value) {
-		return 0;
-	}
-	
-	public String applyMeta(String type, String value) {
-		return null;
+
+	public static void applyMeta(String type, String value) {
+		Map<String,String> allMeta = reference.getMMInfo().getMetadata();
+		allMeta.put(type, value);
 	}
 	
 }

@@ -26,25 +26,20 @@ public class AudioFile {
 	MultimediaInfo info;
 
 	
-	public String getSingleMetadata(String key) {
-
-
-
+	/**
+	 * @param key
+	 * @return
+	 */
+	public String getSingleAudioMetadata(String key) {
 		if (key.equals("samplingrate")) return String.valueOf(info.getAudio().getSamplingRate());
 		if (key.equals("decoder")) return info.getAudio().getDecoder();
 		if (key.equals("bitrate")) return String.valueOf(info.getAudio().getBitRate());
 		if (key.equals("channels")) return String.valueOf(info.getAudio().getChannels());
-		
-
 		return null; // Would return data
 	};
 	
-	public boolean setSingleMetadata(String key, String value) {
-		return true; // Would return true if valid, false if invalid
-	};
-	
-	public boolean setSingleMetadata(String key, int value) {
-		return true; // Would return true if valid, false if invalid
+	public void setSingleAudioMetadata(String key, String value) {
+		// TBD
 	};
 	
 	public MetaLink getMetaLink() {

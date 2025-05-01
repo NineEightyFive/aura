@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 
 import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
@@ -12,29 +13,28 @@ public class ConvertEngine {
 		return null; // Returns audiofile with new metadata, run after file is converted.
 	}
 	
-	public AudioFile[] convert(AudioFile[] files) {
+	public ArrayList<AudioFile> convert(ArrayList<AudioFile> files) {
 
 		int filesDone = 0;
 
-		for(int i=0; i<files.length; i++) {
+		for(AudioFile af : files) {
 
 			try {
 
-				File source = new File(files[i].getPath());		                 
+				File source = new File(af.getPath());		                 
 				File target = new File("file path");                         
 																			
 				//Audio Attributes                                       
 				AudioAttributes audio = new AudioAttributes();              
 				audio.setCodec(AudioAttributes.DIRECT_STREAM_COPY);
-                                /* No idea how to quickly fix this, -Dan
-				audio.setBitRate(audio.getBitRate());                                   
-				audio.setChannels(audio.getChannels());                                       
-				audio.setSamplingRate(audio.getSamplingRate());                               
-				*/
+				audio.setBitRate(audio.getBitRate().orElse(null));                                   
+				audio.setChannels(audio.getChannels().orElse(null));                                       
+				audio.setSamplingRate(audio.getSamplingRate().orElse(null));                               
+				
                                 
 				//Encoding attributes                                       
 				EncodingAttributes attrs = new EncodingAttributes();        
-				attrs.setOutputFormat(files[i].getNewFormat());                                     
+				attrs.setOutputFormat(af.getNewFormat());                                     
 				attrs.setAudioAttributes(audio);
 				attrs.setVideoAttributes(null);                          
 																			
@@ -45,11 +45,11 @@ public class ConvertEngine {
 				filesDone++;
 			} catch(Exception e) {
 				System.err.println("Exception occured when converting file... "+e);
-				/* No idea how to quickly fix this, -Dan
-                                UI.sendNotification("error","Error when converting file: "+e);
-                                */
-			}
 
+                                UI.sendNotification("err","Error when converting file: "+e);
+
+			}
+			UI.sendNotification("gen", "Processed "+filesDone+"/"+files.size()+" files! Yay");
 		}
 
 		return null; // Would return an array of converted audiofiles

@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
  *
  * @author Dan Bennett-Jeffreys
  */
+@SuppressWarnings("unused")
 public class MetadataPanel extends JPanel{
     /*private String name;
     private JTextField label;
@@ -41,6 +42,7 @@ public class MetadataPanel extends JPanel{
             subPanel.add(valueBox);
             this.add(subPanel);
             //TODO: make a (key,valueBox) map so code can change displayed metadata
+            // ** Dan see MetaLink.changemeta(key,val) -o
         }
     }
     

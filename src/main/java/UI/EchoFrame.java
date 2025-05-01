@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
  *
  * @author Dan Bennett-Jeffreys
  */
+@SuppressWarnings("unused")
 public class EchoFrame extends JFrame{
     public EchoFrame(){
         String[] metadataKeys = {
