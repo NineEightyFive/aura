@@ -73,7 +73,7 @@ public static boolean isAudioFile(File file) {
 
 	}
 	
-	public AudioFile[] convertFolderToArray(String path) {
+	public EMAudioFile[] convertFolderToArray(String path) {
 		return null;
 	}
 

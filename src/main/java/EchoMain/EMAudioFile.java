@@ -76,7 +76,7 @@ public class EMAudioFile {
 		file = new File(path);
 		mmObject = new MultimediaObject(file);
 		info = mmObject.getInfo();
-		metaData = new MetaLink(info);
+		metaData = new MetaLink(this);
 	}
 
 }

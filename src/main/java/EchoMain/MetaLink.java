@@ -16,7 +16,7 @@ public class MetaLink {
 	
 	public String getMeta(String type) {
 try {
-		return AudioFileIO.read(af.getFile()).getTag().getFirst(FieldKey.valueOf(type));
+		return AudioFileIO.read(reference.getFile()).getTag().getFirst(FieldKey.valueOf(type));
 } catch(Exception e) {
 	return null;
 }
@@ -24,7 +24,7 @@ try {
 
 	public void applyMeta(String type, String value) {
 		try {
-			AudioFileIO.read(af.getFile()).getTag().setField(FieldKey.valueOf(type),type,value);
+			AudioFileIO.read(reference.getFile()).getTag().setField(FieldKey.valueOf(type),type,value);
 	} catch(Exception e) {
 	}
 		}

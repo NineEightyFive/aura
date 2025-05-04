@@ -9,26 +9,23 @@ import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.encode.EncodingAttributes;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 
 public class ConvertEngine {
 	
-	public AudioFile applyMetaData(AudioFile file, MetaLink data) {
+	public EMAudioFile applyMetaData(EMAudioFile file, MetaLink data) {
 		return null; // Returns audiofile with new metadata, run after file is converted.
 	}
 
-	public static String newFileName(File f, AudioFile src) {
+	public static String newFileName(File f, EMAudioFile src) {
 		String original = f.getName();
 		String baseN = original.contains(".") ? original.substring(0,original.lastIndexOf(".")) : original;
 		return baseN + "." + (src.getNewFormat() != null ? src.getNewFormat() : "mp3"); // If no new format is selected, default to mp3
 	}
 
-	public static File getTargetSrc(File sourceFile, AudioFile src) {
+	public static File getTargetSrc(File sourceFile, EMAudioFile src) {
 		File toReturn = new File(sourceFile.getPath());
 		Path toParent = toReturn.toPath().getParent();
 
@@ -37,11 +34,11 @@ public class ConvertEngine {
 		return targetPath.toFile();
 	}
 	
-	public static void convert(ArrayList<AudioFile> files) {
+	public static void convert(ArrayList<EMAudioFile> files) {
 
 		int filesDone = 0;
 
-		for(AudioFile af : files) {
+		for(EMAudioFile af : files) {
 
 			try {
 
@@ -84,9 +81,9 @@ public class ConvertEngine {
 	}
 	public static void main(String[] args) {
 		System.out.println("I will test the converter");
-            ArrayList<AudioFile> fil = new ArrayList<AudioFile>();
+            ArrayList<EMAudioFile> fil = new ArrayList<EMAudioFile>();
 			try {
-			fil.add(new AudioFile("C:/Users/Owain Lucas/Downloads/CORE_WLMC_SWEEPER_2_OLUCAS_4_4_2025.wav"));
+			fil.add(new EMAudioFile("C:/Users/Owain Lucas/Downloads/CORE_WLMC_SWEEPER_2_OLUCAS_4_4_2025.wav"));
 			fil.get(0).setNewFormat("mp3");
 
 			} catch (EncoderException e) {
