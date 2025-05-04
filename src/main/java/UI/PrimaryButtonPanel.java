@@ -21,7 +21,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public PrimaryButtonPanel() {
         initComponents();
         jAddFile.addActionListener(new AddFileListener());
-        jAddFldr.addActionListener(new RemoveFolderListener());
+        jAddFldr.addActionListener(new AddFolderListener()); // Please fix so it isn't RemoveFolderListener -o
         jClrAll.addActionListener(new ClearAllListener());
         jRmvFile.addActionListener(new RemoveFileListener());
         jRmvFldr.addActionListener(new RemoveFolderListener());
@@ -32,7 +32,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class AddFileListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            Uploader.openFileBrowser();
+            try { Uploader.openFileBrowser("FILE"); } catch(Exception ee) {}
         }
     }
     
@@ -53,7 +53,8 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class AddFolderListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            System.out.println("AddFolderListener");
+            try { Uploader.openFileBrowser("FOLDER"); } catch(Exception ee) { System.out.println(ee);}
         }
     }
     

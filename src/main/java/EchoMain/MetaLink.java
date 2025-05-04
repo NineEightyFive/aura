@@ -49,10 +49,10 @@ try {
 
 	public MetaLink(EMAudioFile afile) {
 		reference = afile;
-		metaChangesToMake =  new HashMap<String, String>()
+		metaChangesToMake =  new HashMap<String, String>();
 	}
 
-	public static void applyData(File src, File target) {
+	public void applyData(File src, File target) {
 		try {
 
 			AudioFile sourceFileIO = AudioFileIO.read(src);
@@ -66,8 +66,10 @@ try {
                 }
             }
 
-			for () {
-
+			for(Map.Entry<String,String> entry : metaChangesToMake.entrySet()) {
+				if (targetTag.hasField(FieldKey.valueOf(entry.getKey()))) {
+					targetTag.setField(FieldKey.valueOf(entry.getKey()), entry.getValue());
+				}
 			}
 
 			AudioFileIO.write(targetFileIO);
