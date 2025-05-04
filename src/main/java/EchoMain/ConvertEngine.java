@@ -67,6 +67,8 @@ public class ConvertEngine {
 				Encoder encoder = new Encoder();                            
 				encoder.encode(new MultimediaObject(source), target, attrs);
 
+				
+
 				filesDone++;
 			} catch(EncoderException e) {
 				System.err.println("Exception occured when converting file... "+e);
