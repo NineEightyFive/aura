@@ -18,7 +18,7 @@ MultimediaInfo infos= mmObject.getInfo();
  */
 
 @SuppressWarnings("unused")
-public class AudioFile {
+public class EMAudioFile {
 	
 	String format;
 	MetaLink metaData;
@@ -68,10 +68,15 @@ public class AudioFile {
 		return info;
 	}
 
-	public AudioFile(String path) throws EncoderException {
+	public File getFile() {
+		return file;
+	}
+
+	public EMAudioFile(String path) throws EncoderException {
 		file = new File(path);
 		mmObject = new MultimediaObject(file);
 		info = mmObject.getInfo();
+		metaData = new MetaLink(info);
 	}
 
 }

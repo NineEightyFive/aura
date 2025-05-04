@@ -45,7 +45,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class ClearAllListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            UI.wipeAllFiles();
         }
     }
     
@@ -66,11 +66,11 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class StartListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            UI.doConvert(UI.getFilesEnqueued());
         }
     }
     
-    public class StopListener implements ActionListener{
+    public class StopListener implements ActionListener{ //We may not need this, depends... -o
         @Override
         public void actionPerformed(ActionEvent e){
             

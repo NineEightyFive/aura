@@ -25,7 +25,7 @@ public class ConvertEngine {
 	public static String newFileName(File f, AudioFile src) {
 		String original = f.getName();
 		String baseN = original.contains(".") ? original.substring(0,original.lastIndexOf(".")) : original;
-		return baseN + "." + src.getNewFormat();
+		return baseN + "." + (src.getNewFormat() != null ? src.getNewFormat() : "mp3"); // If no new format is selected, default to mp3
 	}
 
 	public static File getTargetSrc(File sourceFile, AudioFile src) {

@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 @SuppressWarnings("unused")
 public class UI {
 	
-	static ArrayList<AudioFile> files = new ArrayList<AudioFile>();
+	static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
 	
 	public static void sendNotification(String type, String msg) {
 		//TODO: Have UI setup for this so it actually goes to a popup...
@@ -23,7 +23,9 @@ public class UI {
 		}
 	}
 	
-	public void doConvert(ArrayList<AudioFile> filesToConvert) {
+	public static void doConvert(ArrayList<EMAudioFile> filesToConvert) {
+		if(filesToConvert.size()==0) {
+			UI.sendNotification("err", "Converter Failed As There Are No Files To Convert"); return; }
 		System.out.println("-- STARTING CONVERSION PROCESS --");
 		ConvertEngine.convert(filesToConvert);
 	}
@@ -31,11 +33,21 @@ public class UI {
 	public static void doUpload(File f) {
 
 		try {
-		files.add(new AudioFile(f.getPath()));
+		files.add(new EMAudioFile(f.getPath()));
 		UI.sendNotification("gen", "File "+f.getName()+" Added To List");
 		} catch(Exception e) {
+			System.out.println(e);
 System.out.println("womp womp");
 		}
+	}
+
+	public static void wipeAllFiles() {
+			files.clear();
+			UI.sendNotification("gen", "The list of all files have been cleared");
+	}
+
+	public static ArrayList<EMAudioFile> getFilesEnqueued() {
+		return files;
 	}
 	
 }

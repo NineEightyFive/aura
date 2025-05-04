@@ -2,22 +2,35 @@ package EchoMain;
 
 import java.util.Map;
 
-
+import ws.schild.jave.info.MultimediaInfo;
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.FieldKey;
 
 @SuppressWarnings("unused")
 public class MetaLink {
 	
-	private AudioFile reference;
+	//private MultimediaInfo reference;
+	private EMAudioFile reference;
 	
 	public String getMeta(String type) {
-		Map<String,String> allMeta = reference.getMMInfo().getMetadata();
-		if(!allMeta.containsKey(type)) return allMeta.get(type);
-		return null;
+try {
+		return AudioFileIO.read(af.getFile()).getTag().getFirst(FieldKey.valueOf(type));
+} catch(Exception e) {
+	return null;
+}
 	}
 
 	public void applyMeta(String type, String value) {
-		Map<String,String> allMeta = reference.getMMInfo().getMetadata();
-		allMeta.put(type, value);
+		try {
+			AudioFileIO.read(af.getFile()).getTag().setField(FieldKey.valueOf(type),type,value);
+	} catch(Exception e) {
+	}
+		}
+
+	public MetaLink(EMAudioFile afile) {
+		reference = afile;
 	}
 	
 }
