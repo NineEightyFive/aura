@@ -39,7 +39,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class RemoveFileListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            UI.removeSelectedFiles();
         }
     }
     

@@ -42,6 +42,14 @@ public class FileListPanel extends JPanel{
         fileListModel.removeAllElements();
     }
     
+    public int[] getSelectedIndices(){
+        return fileList.getSelectedIndices();
+    }
+    
+    public void removeAt(int i){
+        fileListModel.removeElementAt(i);
+    }
+    
     //public HashSet<String>
     
     public class FileListSelectionListener implements ListSelectionListener{

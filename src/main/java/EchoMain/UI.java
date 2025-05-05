@@ -50,6 +50,16 @@ System.out.println("womp womp");
 			UI.sendNotification("gen", "The list of all files have been cleared");
 	}
 
+        public static void removeSelectedFiles() {
+            int[]  indices = filePanel.getSelectedIndices();
+            Arrays.sort(indices);
+            for(int j = indices.length-1; j>=0; j--){
+                int i = indices[j];
+                files.remove(i);
+                filePanel.removeAt(i);
+            }
+        }
+        
 	public static ArrayList<EMAudioFile> getFilesEnqueued() {
 		return files;
 	}
