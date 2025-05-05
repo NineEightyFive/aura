@@ -112,7 +112,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
 
         jStop.setText("Stop");
 
-        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mp3", "m4a", "flac", "wav", "wma", "aac", "ogg" }));
         jFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormatActionPerformed(evt);
