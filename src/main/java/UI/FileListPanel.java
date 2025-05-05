@@ -4,7 +4,7 @@
  */
 package UI;
 
-import EchoMain.EMAudioFile;
+import EchoMain.*;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;

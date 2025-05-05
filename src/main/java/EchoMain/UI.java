@@ -76,7 +76,7 @@ System.out.println("womp womp");
             for(int i: indices){
                 EMAudioFile emf = files.get(i);
                 System.out.println("File: "+ emf.getFileName());
-                emf.setSingleAudioMetadata(key, value);
+                emf.getMetaLink().applyMeta(key, value);
             }
         }
         
@@ -102,7 +102,12 @@ System.out.println("womp womp");
         
         public static void formatChanged(String format){
             System.out.println("Format changed to " + format);
-            System.out.println("TODO: write this code");
+			int[] indices = filePanel.getSelectedIndices();
+            for(int i: indices){
+                EMAudioFile emf = files.get(i);
+                System.out.println("File: "+ emf.getFileName());
+                emf.setNewFormat(format);
+            }
         }
         
 	public static ArrayList<EMAudioFile> getFilesEnqueued() {
