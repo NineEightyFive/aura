@@ -56,36 +56,9 @@ public class FileListPanel extends JPanel{
 
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            int[] indices = fileList.getSelectedIndices();
-            for(int i: indices){
-                //EMAudioFile file = EchoMain.UI.files.get(i);
-                //file.
-            }
-            
-            
-            /*List<String> selections = fileList.getSelectedValuesList();
-            ArrayList<String> list = new ArrayList<>();
-            //list.*/
+            EchoMain.UI.refreshSelection();
         }
         
     }
     
-    public class FileListDataListener implements ListDataListener{
-
-        @Override
-        public void intervalAdded(ListDataEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        @Override
-        public void intervalRemoved(ListDataEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        @Override
-        public void contentsChanged(ListDataEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-        
-    }
 }

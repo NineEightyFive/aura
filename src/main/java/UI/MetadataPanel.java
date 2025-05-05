@@ -81,6 +81,7 @@ public final class MetadataPanel extends JPanel{
     
     private void metadataChangedByUI(String key, String value){
         outputValues.put(key, value);
+        EchoMain.UI.setSingleMetadata(key, value);
         System.out.println("metadata changed: key=\""+key+"\" value=\"" + value+"\"");
     }
     

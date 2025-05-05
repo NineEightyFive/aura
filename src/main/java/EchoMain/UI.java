@@ -1,6 +1,7 @@
 package EchoMain;
 
 import UI.FileListPanel;
+import UI.MetadataPanel;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.io.File;
@@ -8,9 +9,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import ws.schild.jave.info.MultimediaInfo;
 @SuppressWarnings("unused")
 public class UI {
 	public static FileListPanel filePanel;
+        public static MetadataPanel metadataPanel;
 	public static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
 	
 	public static void sendNotification(String type, String msg) {
@@ -37,6 +43,7 @@ public class UI {
                 EMAudioFile emf = new EMAudioFile(f.getPath());
 		files.add(emf);
                 filePanel.addToList(emf.getFileName());
+                refreshSelection();
 		UI.sendNotification("gen", "File "+f.getName()+" Added To List");
 		} catch(Exception e) {
 			System.out.println(e);
@@ -47,6 +54,7 @@ System.out.println("womp womp");
 	public static void wipeAllFiles() {
 			files.clear();
                         filePanel.clearList();
+                        refreshSelection();
 			UI.sendNotification("gen", "The list of all files have been cleared");
 	}
 
@@ -58,6 +66,34 @@ System.out.println("womp womp");
                 files.remove(i);
                 filePanel.removeAt(i);
             }
+            refreshSelection();
+        }
+        
+        public static void setSingleMetadata(String key, String value){
+            //HashMap<String, String> desiredOutput = metadataPanel.getOutputValues();
+            int[] indices = filePanel.getSelectedIndices();
+            for(int i: indices){
+                EMAudioFile emf = files.get(i);
+                emf.setSingleAudioMetadata(key, value);
+            }
+        }
+        
+        public static void refreshSelection(){
+            int[] indices = filePanel.getSelectedIndices();
+            HashSet<String> keyset = new HashSet<>();
+            HashMap<String, ArrayList<String>> inputValues = new HashMap<>();
+            for(int i: indices){
+                EMAudioFile emf = files.get(i);
+                MultimediaInfo mmi = emf.getMMInfo();
+                Map<String,String> metadata = mmi.getMetadata();
+                keyset.addAll(metadata.keySet());
+                for(Map.Entry<String,String> entry: metadata.entrySet()){
+                    inputValues.putIfAbsent(entry.getKey(), new ArrayList<String>());
+                    inputValues.get(entry.getKey()).add(entry.getValue());
+                }
+            }
+            metadataPanel.setKeyset(keyset);
+            metadataPanel.setInputValues(inputValues);
         }
         
 	public static ArrayList<EMAudioFile> getFilesEnqueued() {

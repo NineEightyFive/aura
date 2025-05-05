@@ -53,7 +53,7 @@ public class EchoFrame extends JFrame{
         
         listPanel = new FileListPanel();
         EchoMain.UI.filePanel = listPanel;
-        
+        EchoMain.UI.metadataPanel = mdPanel;
         this.add(buttonPanel, BorderLayout.PAGE_START);
         this.add(mdPanel, BorderLayout.CENTER);
         this.add(listPanel, BorderLayout.LINE_START);
