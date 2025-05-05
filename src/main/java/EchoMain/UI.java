@@ -49,5 +49,23 @@ System.out.println("womp womp");
 	public static ArrayList<EMAudioFile> getFilesEnqueued() {
 		return files;
 	}
+
+	public static EMAudioFile checkIfIn(String va) {
+		for(EMAudioFile f : files) {
+			if(f.getFileName().equals(va)) return f;
+		}
+		return null;
+	}
+
+	public static ArrayList<EMAudioFile> getSelectedFilesInList(ArrayList<String> list) {
+
+		ArrayList<EMAudioFile> toReturn = new ArrayList<EMAudioFile>();
+
+		for(String f : list) {
+			if(checkIfIn(f)!=null) toReturn.add(checkIfIn(f));
+		}
+
+return toReturn;
+	}
 	
 }
