@@ -56,6 +56,8 @@ public class EMAudioFile {
 		return file.getPath();
 	}
 
+	
+
 	public String getNewFormat() {
 		return newFormat;
 	}
@@ -70,6 +72,10 @@ public class EMAudioFile {
 
 	public File getFile() {
 		return file;
+	}
+
+	public String getFileName() {
+		return file.getName();
 	}
 
 	public EMAudioFile(String path) throws EncoderException {
