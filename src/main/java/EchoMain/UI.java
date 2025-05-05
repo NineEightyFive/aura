@@ -1,5 +1,6 @@
 package EchoMain;
 
+import UI.EchoFrame;
 import UI.FileListPanel;
 import UI.MetadataPanel;
 import java.util.Arrays;
@@ -13,21 +14,40 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import ws.schild.jave.info.MultimediaInfo;
+import javax.swing.JOptionPane;
 @SuppressWarnings("unused")
 public class UI {
+        public static EchoFrame echoFrame;
 	public static FileListPanel filePanel;
         public static MetadataPanel metadataPanel;
 	public static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
 	
 	public static void sendNotification(String type, String msg) {
-		//TODO: Have UI setup for this so it actually goes to a popup...
-		if(type.equals("err")) {
-			System.out.println("ERROR: "+msg);
-		} else if(type.equals("gen")) {
-			System.out.println("INFORMATION: "+msg);
-		} else if(type.equals("war")) {
-			System.out.println("WARNING: "+msg);
-		}
+		String title;
+                int messageType;
+            switch (type) {
+                case "err" -> {
+                    System.out.println("ERROR: "+msg);
+                    title = "Error";
+                    messageType = JOptionPane.ERROR_MESSAGE;
+                }
+                case "gen" -> {
+                    System.out.println("INFORMATION: "+msg);
+                    title = "Information";
+                    messageType = JOptionPane.INFORMATION_MESSAGE;
+                }
+                case "war" -> {
+                    System.out.println("WARNING: "+msg);
+                    title = "Warning";
+                    messageType = JOptionPane.WARNING_MESSAGE;
+                }
+                default -> {
+                    System.out.println("Unknown Message Type: "+type);
+                    title = "Unknown";
+                    messageType = JOptionPane.WARNING_MESSAGE;
+                }
+            }
+                JOptionPane.showMessageDialog(echoFrame, msg, title, messageType);
 	}
 	
 	public static void doConvert(ArrayList<EMAudioFile> filesToConvert) {
