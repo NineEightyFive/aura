@@ -6,6 +6,7 @@ package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import EchoMain.*;
 
 /**
@@ -20,7 +21,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public PrimaryButtonPanel() {
         initComponents();
         jAddFile.addActionListener(new AddFileListener());
-        jAddFldr.addActionListener(new RemoveFolderListener());
+        jAddFldr.addActionListener(new AddFolderListener()); // Please fix so it isn't RemoveFolderListener -o
         jClrAll.addActionListener(new ClearAllListener());
         jRmvFile.addActionListener(new RemoveFileListener());
         jRmvFldr.addActionListener(new RemoveFolderListener());
@@ -31,7 +32,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class AddFileListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            Uploader.openFileBrowser();
+            try { Uploader.openFileBrowser("FILE"); } catch(Exception ee) {}
         }
     }
     
@@ -45,14 +46,15 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class ClearAllListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            UI.wipeAllFiles();
         }
     }
     
     public class AddFolderListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            System.out.println("AddFolderListener");
+            try { Uploader.openFileBrowser("FOLDER"); } catch(Exception ee) { System.out.println(ee);}
         }
     }
     
@@ -66,11 +68,11 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     public class StartListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
+            UI.doConvert(UI.getFilesEnqueued());
         }
     }
     
-    public class StopListener implements ActionListener{
+    public class StopListener implements ActionListener{ //We may not need this, depends... -o
         @Override
         public void actionPerformed(ActionEvent e){
             

@@ -31,17 +31,13 @@ public class EchoFrame extends JFrame{
     
     public EchoFrame(){
         String[] metadataKeys = {
-            "artist",
             "title",
-            "CD",
-            "blah",
-            "these",
-            "are",
-            "just",
-            "to",
-            "take",
-            "up",
-            "space"
+            "artist",
+            "album_artist",
+            "composer",
+            "album",
+            "track_number",
+            "disc_number",
         };
         
         HashSet<String> mandatoryKeys = new HashSet<>();

@@ -17,5 +17,10 @@
 <artifactId>jave-all-deps</artifactId>
 <version>3.5.0</version> <!-- Replace with the latest version if necessary -->
 </dependency>
+<dependency>
+    <groupId>net.jthink</groupId>
+    <artifactId>jaudiotagger</artifactId>
+    <version>3.0.1</version>
+</dependency>
 </dependencies>
 </project>

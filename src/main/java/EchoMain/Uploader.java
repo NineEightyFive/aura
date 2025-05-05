@@ -35,8 +35,9 @@ public static boolean isAudioFile(File file) {
 	
 	try {
 	String ext = Files.probeContentType(Paths.get(file.getPath()));
+	if(ext==null) return false;
 		for(int i=0; i<allowedTypes.length;i++) {
-			System.out.println(ext+" audio/"+allowedTypes[i]);
+			//System.out.println(ext+" audio/"+allowedTypes[i]);
 			if (ext.toLowerCase().equals("audio/"+allowedTypes[i])) return true;
 		}
 		return false; // Not an audio file
@@ -46,8 +47,8 @@ public static boolean isAudioFile(File file) {
 	return false;
 }
 
-	public static void openFileBrowser() {
-		
+	public static void openFileBrowser(String mode) throws IOException {
+		if(mode.equals("FILE")) {
 		JFileChooser fc = new JFileChooser();
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		
@@ -60,7 +61,6 @@ public static boolean isAudioFile(File file) {
 
 
 				if(isAudioFile(file)) {
-					System.out.println("Passes the test!");
 					UI.doUpload(file);
 
 				} else {
@@ -70,16 +70,38 @@ public static boolean isAudioFile(File file) {
             } else {
                 System.out.println("Open command cancelled by user.");
             }
+		} else if(mode.equals("FOLDER")) {
 
+
+				JFileChooser fc = new JFileChooser();
+				fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				
+				 int returnVal = fc.showOpenDialog(null);
+		
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						
+						File file = fc.getSelectedFile();
+
+							File[] dirListing = file.listFiles();
+							if(dirListing.length == 0) System.out.println("Empty Directory!");
+							for(int i=0; i<dirListing.length; i++) {
+								if(dirListing[i].isFile() && isAudioFile(dirListing[i])) UI.doUpload(dirListing[i]);
+							};
+						//}
+		
+					} else {
+						System.out.println("Open command cancelled by user."); 
+					} 
+				}
 	}
 	
-	public AudioFile[] convertFolderToArray(String path) {
+	public EMAudioFile[] convertFolderToArray(String path) {
 		return null;
 	}
 
-public static void main(String[] args) {
+public static void main(String[] args) throws Exception {
 		System.out.println("I will open the file chooser");
-            openFileBrowser();   
+            openFileBrowser("FOLDER");   
 	}
 
 }
