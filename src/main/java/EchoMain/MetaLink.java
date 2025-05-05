@@ -30,11 +30,17 @@ try {
 	public void applyMeta(String type, String value) {
 		try {
 
+			if(value==null || value.equals("<clear>")) value="";
 
+			if(value.equals("") || value.equals(" ")|| value.equals("<keep>")) return;
+			
+			System.out.println("Yep");
 
-			AudioFileIO.read(reference.getFile()).getTag().setField(FieldKey.valueOf(type),value);
-	} catch(Exception e) {
-	}
+			//AudioFileIO.read(reference.getFile()).getTag().setField(FieldKey.valueOf(type),value);
+			metaChangesToMake.put(type, value);
+			System.out.println("Yup");
+	} catch(Exception e) { e.printStackTrace();
+	}	
 		}
 
 	public String checkForChangedValue(String key) {
@@ -54,28 +60,36 @@ try {
 
 	public void applyData(File src, File target) {
 		try {
-
+			System.out.println("A");
 			AudioFile sourceFileIO = AudioFileIO.read(src);
 			AudioFile targetFileIO = AudioFileIO.read(target);
 
 			Tag sourceTag = sourceFileIO.getTag();
 			Tag targetTag = targetFileIO.getTag();
+			/* 
 			for (FieldKey fieldKey : FieldKey.values()) {
                 if (sourceTag.hasField(fieldKey)) {
-                    targetTag.setField(fieldKey, sourceTag.getValue(fieldKey, 0));
+					System.out.println("B");
+                    targetTag.setField(fieldKey, sourceTag.getValue(fieldKey,0));
                 }
-            }
-
+            }*/
+			System.out.println("C");
 			for(Map.Entry<String,String> entry : metaChangesToMake.entrySet()) {
-				if (targetTag.hasField(FieldKey.valueOf(entry.getKey()))) {
+
+
+					System.out.println((FieldKey.valueOf(entry.getKey())));
+					System.out.println(targetTag.hasField(FieldKey.valueOf(entry.getKey())));
+					System.out.println(entry.getValue());
+
+				//if (targetTag.hasField(FieldKey.valueOf(entry.getKey()))) {
 					targetTag.setField(FieldKey.valueOf(entry.getKey()), entry.getValue());
-				}
+				//}
 			}
 
 			AudioFileIO.write(targetFileIO);
 
 	} catch(Exception e) {
-	
+	e.printStackTrace();
 	}
 		}
 		

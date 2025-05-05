@@ -31,7 +31,7 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Attempting to initialize EchoMaster...");
                 MetadataPanel.doesThisExist();//Somehow it didn't exist until I did this
-			System.out.println(Arrays.toString(FieldKey.values()));
+			//System.out.println(Arrays.toString(FieldKey.values()));
 		init();
 	}
 }
