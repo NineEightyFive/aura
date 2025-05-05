@@ -53,8 +53,13 @@ System.out.println("womp womp");
 
 	public static void wipeAllFiles() {
 			files.clear();
+<<<<<<< Updated upstream
                         filePanel.clearList();
                         refreshSelection();
+=======
+            filePanel.clearList();
+			
+>>>>>>> Stashed changes
 			UI.sendNotification("gen", "The list of all files have been cleared");
 	}
 

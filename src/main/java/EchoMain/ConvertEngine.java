@@ -67,11 +67,13 @@ public class ConvertEngine {
 				Encoder encoder = new Encoder();                            
 				encoder.encode(new MultimediaObject(source), target, attrs);
 
-				
+				// Metadata Changes
 
+				System.out.println("Attempting to set metadata...");
+				af.getMetaLink().applyData(source,target);
+				System.out.println("Set MetaData successfully");
 				filesDone++;
 			} catch(EncoderException e) {
-				System.err.println("Exception occured when converting file... "+e);
 
                                 UI.sendNotification("err","Error when converting file: "+e);
 
