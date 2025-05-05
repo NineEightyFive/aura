@@ -19,6 +19,12 @@ public class ConvertEngine {
 		return null; // Returns audiofile with new metadata, run after file is converted.
 	}
 
+	public static String getOldFormat(EMAudioFile src) {
+		String original = src.getFile().getName();
+		String baseN = original.contains(".") ? original.substring(0,original.lastIndexOf(".")) : original;
+		return baseN;
+	}
+
 	public static String newFileName(File f, EMAudioFile src) {
 		String original = f.getName();
 		String baseN = original.contains(".") ? original.substring(0,original.lastIndexOf(".")) : original;
@@ -42,12 +48,16 @@ public class ConvertEngine {
 
 			try {
 
+				
+
 				File source = new File(af.getPath());		                 
 				File target = getTargetSrc(source,af);     
 				//(Paths.get(af.getPath()).getParent())                    
 										
-				System.out.println(source.toString());
-				System.out.println(target.toString());
+				//System.out.println(source.toString());
+				//System.out.println(target.toString());
+
+				if(!getOldFormat(af).equals(af.getNewFormat())) {
 
 				//Audio Attributes                                       
 				AudioAttributes audio = new AudioAttributes();              
@@ -66,7 +76,7 @@ public class ConvertEngine {
 				//Encode                                                    
 				Encoder encoder = new Encoder();                            
 				encoder.encode(new MultimediaObject(source), target, attrs);
-
+				}
 				// Metadata Changes
 
 				System.out.println("Attempting to set metadata...");
@@ -78,22 +88,9 @@ public class ConvertEngine {
                                 UI.sendNotification("err","Error when converting file: "+e);
 
 			}
-			UI.sendNotification("gen", "Processed "+filesDone+"/"+files.size()+" files! Yay");
+			
 		}
-
-		//return null; // Would return an array of converted audiofiles
-	}
-	public static void main(String[] args) {
-		System.out.println("I will test the converter");
-            ArrayList<EMAudioFile> fil = new ArrayList<EMAudioFile>();
-			try {
-			fil.add(new EMAudioFile("C:/Users/Owain Lucas/Downloads/CORE_WLMC_SWEEPER_2_OLUCAS_4_4_2025.wav"));
-			fil.get(0).setNewFormat("mp3");
-
-			} catch (EncoderException e) {
-
-			}
-			convert(fil);
+		UI.sendNotification("gen", "Processed "+filesDone+"/"+files.size()+" files!\nErrors: "+(files.size()-filesDone));
 	}
 
 }
