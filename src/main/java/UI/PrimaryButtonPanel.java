@@ -95,6 +95,8 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         jClrAll = new javax.swing.JButton();
         jStart = new javax.swing.JButton();
         jStop = new javax.swing.JButton();
+        jFormat = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         jAddFile.setText("Add File");
 
@@ -110,6 +112,15 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
 
         jStop.setText("Stop");
 
+        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jFormat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormatActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Format");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,48 +131,69 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jStart)
-                                .addGap(18, 18, 18)
-                                .addComponent(jStop))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jAddFldr)
                                 .addGap(18, 18, 18)
                                 .addComponent(jRmvFldr))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jAddFile)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRmvFile))))
+                                .addComponent(jRmvFile))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jStart)
+                                .addGap(18, 18, 18)
+                                .addComponent(jStop)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jFormat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(25, 25, 25))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jClrAll)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jAddFile)
-                    .addComponent(jRmvFile))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jAddFldr)
-                    .addComponent(jRmvFldr))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jStart)
-                    .addComponent(jStop))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jAddFile)
+                            .addComponent(jRmvFile))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jAddFldr)
+                            .addComponent(jRmvFldr))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jStart)
+                            .addComponent(jStop))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(5, 5, 5)
+                        .addComponent(jFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
                 .addComponent(jClrAll)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        jLabel1.getAccessibleContext().setAccessibleName("Format");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormatActionPerformed
+        UI.formatChanged((String)jFormat.getSelectedItem());
+    }//GEN-LAST:event_jFormatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAddFile;
     private javax.swing.JButton jAddFldr;
     private javax.swing.JButton jClrAll;
+    private javax.swing.JComboBox<String> jFormat;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jRmvFile;
     private javax.swing.JButton jRmvFldr;
     private javax.swing.JButton jStart;

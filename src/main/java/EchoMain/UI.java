@@ -100,6 +100,11 @@ System.out.println("womp womp");
             metadataPanel.setInputValues(inputValues);
         }
         
+        public static void formatChanged(String format){
+            System.out.println("Format changed to " + format);
+            System.out.println("TODO: write this code");
+        }
+        
 	public static ArrayList<EMAudioFile> getFilesEnqueued() {
 		return files;
 	}
