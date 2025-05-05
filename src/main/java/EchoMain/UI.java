@@ -70,20 +70,24 @@ System.out.println("womp womp");
         }
         
         public static void setSingleMetadata(String key, String value){
+            System.out.println("Setting metadata for selected files");
             //HashMap<String, String> desiredOutput = metadataPanel.getOutputValues();
             int[] indices = filePanel.getSelectedIndices();
             for(int i: indices){
                 EMAudioFile emf = files.get(i);
+                System.out.println("File: "+ emf.getFileName());
                 emf.setSingleAudioMetadata(key, value);
             }
         }
         
         public static void refreshSelection(){
+            System.out.println("Refreshing Selected Files");
             int[] indices = filePanel.getSelectedIndices();
             HashSet<String> keyset = new HashSet<>();
             HashMap<String, ArrayList<String>> inputValues = new HashMap<>();
             for(int i: indices){
                 EMAudioFile emf = files.get(i);
+                System.out.println("File: "+emf.getFileName());
                 MultimediaInfo mmi = emf.getMMInfo();
                 Map<String,String> metadata = mmi.getMetadata();
                 keyset.addAll(metadata.keySet());
