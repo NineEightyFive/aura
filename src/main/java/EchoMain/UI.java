@@ -80,6 +80,16 @@ System.out.println("womp womp");
             }
         }
         
+		static String[] metadataKeys = {
+            "TITLE",
+            "ARTIST",
+            "ALBUM_ARTIST",
+            "COMPOSER",
+            "ALBUM",
+            "TRACK",
+            "DISC_NO",
+        };
+		
         public static void refreshSelection(){
             System.out.println("Refreshing Selected Files");
             int[] indices = filePanel.getSelectedIndices();
@@ -88,8 +98,14 @@ System.out.println("womp womp");
             for(int i: indices){
                 EMAudioFile emf = files.get(i);
                 System.out.println("File: "+emf.getFileName());
-                MultimediaInfo mmi = emf.getMMInfo();
-                Map<String,String> metadata = mmi.getMetadata();
+                MetaLink mmi = emf.getMetaLink();
+                Map<String,String> metadata = new HashMap<>();
+
+				for(int j=0; j<metadataKeys.length; j++) {
+					metadata.put(metadataKeys[j],mmi.getMeta(metadataKeys[j]));
+				}
+
+				
                 keyset.addAll(metadata.keySet());
                 for(Map.Entry<String,String> entry: metadata.entrySet()){
                     inputValues.putIfAbsent(entry.getKey(), new ArrayList<String>());
