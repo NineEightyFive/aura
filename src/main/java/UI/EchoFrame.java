@@ -7,14 +7,18 @@ package UI;
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 
 
 /**
@@ -29,7 +33,15 @@ public class EchoFrame extends JFrame{
         String[] metadataKeys = {
             "artist",
             "title",
-            "date"
+            "CD",
+            "blah",
+            "these",
+            "are",
+            "just",
+            "to",
+            "take",
+            "up",
+            "space"
         };
         
         HashSet<String> mandatoryKeys = new HashSet<>();
@@ -37,10 +49,15 @@ public class EchoFrame extends JFrame{
         
         
         this.setLayout(new BorderLayout());
+        //this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         PrimaryButtonPanel buttonPanel = new PrimaryButtonPanel();
         mdPanel = new MetadataPanel(mandatoryKeys);
+        
+        JPanel listPanel = new FileListPanel();
+        
+        
         this.add(buttonPanel, BorderLayout.PAGE_START);
         this.add(mdPanel, BorderLayout.CENTER);
-        
+        this.add(listPanel, BorderLayout.LINE_START);
     }
 }
