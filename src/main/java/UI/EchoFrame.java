@@ -27,7 +27,9 @@ import javax.swing.JList;
  */
 @SuppressWarnings("unused")
 public class EchoFrame extends JFrame{
-    public MetadataPanel mdPanel;
+    private PrimaryButtonPanel buttonPanel;
+    private MetadataPanel mdPanel;
+    private FileListPanel listPanel;
     
     public EchoFrame(){
         String[] metadataKeys = {
@@ -46,11 +48,11 @@ public class EchoFrame extends JFrame{
         
         this.setLayout(new BorderLayout());
         //this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        PrimaryButtonPanel buttonPanel = new PrimaryButtonPanel();
+        buttonPanel = new PrimaryButtonPanel();
         mdPanel = new MetadataPanel(mandatoryKeys);
         
-        JPanel listPanel = new FileListPanel();
-        
+        listPanel = new FileListPanel();
+        EchoMain.UI.filePanel = listPanel;
         
         this.add(buttonPanel, BorderLayout.PAGE_START);
         this.add(mdPanel, BorderLayout.CENTER);

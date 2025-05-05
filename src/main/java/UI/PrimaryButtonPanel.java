@@ -14,7 +14,7 @@ import EchoMain.*;
  * @author Dan Bennett-Jeffreys
  */
 public class PrimaryButtonPanel extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form PrimaryButtonPanel
      */

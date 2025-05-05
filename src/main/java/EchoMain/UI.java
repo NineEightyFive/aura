@@ -1,5 +1,6 @@
 package EchoMain;
 
+import UI.FileListPanel;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.io.File;
@@ -9,8 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 @SuppressWarnings("unused")
 public class UI {
-	
-	static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
+	public static FileListPanel filePanel;
+	public static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
 	
 	public static void sendNotification(String type, String msg) {
 		//TODO: Have UI setup for this so it actually goes to a popup...
@@ -33,7 +34,9 @@ public class UI {
 	public static void doUpload(File f) {
 
 		try {
-		files.add(new EMAudioFile(f.getPath()));
+                EMAudioFile emf = new EMAudioFile(f.getPath());
+		files.add(emf);
+                filePanel.addToList(emf.getFileName());
 		UI.sendNotification("gen", "File "+f.getName()+" Added To List");
 		} catch(Exception e) {
 			System.out.println(e);
@@ -43,6 +46,7 @@ System.out.println("womp womp");
 
 	public static void wipeAllFiles() {
 			files.clear();
+                        filePanel.clearList();
 			UI.sendNotification("gen", "The list of all files have been cleared");
 	}
 
