@@ -4,6 +4,7 @@
  */
 package UI;
 
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
@@ -84,6 +85,7 @@ public final class MetadataPanel extends JPanel{
     }
     
     public MetadataPanel(HashSet<String> keyset){
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.mandatoryKeyset = keyset;
         keys = new HashSet<>();
         keyPanels = new HashMap<>();
@@ -92,23 +94,6 @@ public final class MetadataPanel extends JPanel{
         setKeyset(new HashSet());
     }
     
-    /*public MetadataPanel(String[] keys, String[] defaults){
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        for (String key: keys){
-            JPanel subPanel = new JPanel();
-            subPanel.setLayout(new FlowLayout());
-            JTextField label = new JTextField(key);
-            label.setEditable(false);
-            JComboBox valueBox = new JComboBox(defaults);
-            valueBox.setEditable(true);
-            valueBox.addActionListener(new MetadataComboBoxListener(key));
-            subPanel.add(label);
-            subPanel.add(valueBox);
-            this.add(subPanel);
-            //TODO: make a (key,valueBox) map so code can change displayed metadata
-            // ** Dan see MetaLink.changemeta(key,val) -o
-        }
-    }*/
     
         public static void doesThisExist(){
         System.out.println("The MetadataPanel class exists");
@@ -119,11 +104,14 @@ public final class MetadataPanel extends JPanel{
         private final JLabel label;
         private final JComboBox valueBox;
         public MDSingleKeyPanel(String key){
-            this.setLayout(new FlowLayout());
+            //this.setLayout(new FlowLayout(FlowLayout.TRAILING));
+            this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
             label = new JLabel(key);
+            label.setMinimumSize(new Dimension(80,20));
             valueBox = new JComboBox(defaultChoices);
             valueBox.setEditable(true);
             valueBox.addActionListener(new MetadataComboBoxListener(key));
+            valueBox.setMaximumSize(new Dimension(160,20));
             this.add(label);
             this.add(valueBox);
         }
