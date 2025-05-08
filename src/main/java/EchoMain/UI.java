@@ -22,6 +22,11 @@ public class UI {
         public static MetadataPanel metadataPanel;
 	public static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
 	
+    /**
+     * 
+     * @param type Type of message to send (Error - err, Information - gen, Warning - war)
+     * @param msg The message to be displayed to the user
+     */
 	public static void sendNotification(String type, String msg) {
 		String title;
                 int messageType;
@@ -50,6 +55,10 @@ public class UI {
                 JOptionPane.showMessageDialog(echoFrame, msg, title, messageType);
 	}
 	
+    /**
+     * Executes the converter engine to start the conversion process
+     * @param filesToConvert Full list of files to run conversion on
+     */
 	public static void doConvert(ArrayList<EMAudioFile> filesToConvert) {
 		if(filesToConvert.size()==0) {
 			UI.sendNotification("err", "Converter Failed As There Are No Files To Convert"); return; }
@@ -67,7 +76,6 @@ public class UI {
 		UI.sendNotification("gen", "File "+f.getName()+" Added To List");
 		} catch(Exception e) {
 			System.out.println(e);
-System.out.println("womp womp");
 		}
 	}
 
@@ -122,6 +130,7 @@ System.out.println("womp womp");
                 Map<String,String> metadata = new HashMap<>();
 
 				for(int j=0; j<metadataKeys.length; j++) {
+
 					metadata.put(metadataKeys[j],mmi.getMeta(metadataKeys[j]));
 				}
 

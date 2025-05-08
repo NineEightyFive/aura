@@ -53,6 +53,10 @@ public class EMAudioFile {
 
 	};
 	
+	/**
+	 * 
+	 * @return metaLink Object for accessing and modifying metadata functions
+	 */
 	public MetaLink getMetaLink() {
 		return metaData;
 	}
@@ -68,24 +72,32 @@ public class EMAudioFile {
 
 	
 /**
- * 
+ * Returns the currrently set new file format
  * @return The new file format to convert the file to, default is MP3
  */
 	public String getNewFormat() {
 		return newFormat;
 	}
 	/**
-	 * 
+	 * Changes the new file format for the engine to convert to
 	 * @param format The new file format to convert the file to
 	 */
 	public void setNewFormat(String format) {
 		newFormat = format;
 	}
 
+	/**
+	 * Returns MultiMediaInfo object for adjusting codec information
+	 * @return MultiMediaInfo object
+	 */
 	public MultimediaInfo getMMInfo() {
 		return info;
 	}
 
+	/**
+	 * Returns file object for accessing File methods
+	 * @return File Object
+	 */
 	public File getFile() {
 		return file;
 	}

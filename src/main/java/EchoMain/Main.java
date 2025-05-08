@@ -17,6 +17,9 @@ import ws.schild.jave.MultimediaObject;
 @SuppressWarnings("unused")
 public class Main {
 	
+	/**
+	 * Initalization Function for EchoMaster, runs and sets the window up
+	 */
 	public static void init() {
 		// Run initalization of program, start UI, etc.
 		// This will run when the app is started.

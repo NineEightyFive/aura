@@ -24,11 +24,12 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         jAddFldr.addActionListener(new AddFolderListener()); // Please fix so it isn't RemoveFolderListener -o
         jClrAll.addActionListener(new ClearAllListener());
         jRmvFile.addActionListener(new RemoveFileListener());
-        jRmvFldr.addActionListener(new RemoveFolderListener());
         jStart.addActionListener(new StartListener());
-        jStop.addActionListener(new StopListener());
     }
 
+    /**
+     * ActionListener for Add File Button
+     */
     public class AddFileListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -36,6 +37,9 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * ActionListener for Remove File Button
+     */
     public class RemoveFileListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -43,6 +47,9 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * ActionListener for Wipe All Button
+     */
     public class ClearAllListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -50,6 +57,9 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * ActionListener for Add Folder Button
+     */
     public class AddFolderListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -58,24 +68,13 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         }
     }
     
-    public class RemoveFolderListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            
-        }
-    }
-    
+    /**
+     * ActionListener for Start Button
+     */
     public class StartListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             UI.doConvert(UI.getFilesEnqueued());
-        }
-    }
-    
-    public class StopListener implements ActionListener{ //We may not need this, depends... -o
-        @Override
-        public void actionPerformed(ActionEvent e){
-            
         }
     }
     

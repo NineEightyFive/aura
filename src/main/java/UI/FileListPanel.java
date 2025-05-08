@@ -34,23 +34,35 @@ public class FileListPanel extends JPanel{
         this.add(listPane);
     }
     
+
+    /**
+     * Adds a file to the list panel
+     * @param filename Name of file to add
+     */
     public void addToList(String filename){
         fileListModel.addElement(filename);
     }
     
+    /**
+     * Wipes List of files
+     */
     public void clearList(){
         fileListModel.removeAllElements();
     }
     
+
     public int[] getSelectedIndices(){
         return fileList.getSelectedIndices();
     }
     
+
+    /**
+     * Removes specified file # from list
+     * @param i File # to remove
+     */
     public void removeAt(int i){
         fileListModel.removeElementAt(i);
     }
-    
-    //public HashSet<String>
     
     public class FileListSelectionListener implements ListSelectionListener{
 

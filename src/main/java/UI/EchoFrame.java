@@ -31,7 +31,7 @@ public class EchoFrame extends JFrame{
     private MetadataPanel mdPanel;
     private FileListPanel listPanel;
     
-    public EchoFrame(){
+    public EchoFrame(){ //Default Audio Tags, for use with JAudioTagger
         String[] metadataKeys = {
             "TITLE",
             "ARTIST",
@@ -42,6 +42,7 @@ public class EchoFrame extends JFrame{
             "DISC_NO",
         };
         
+        // Adds metadataKeys dropdowns
         HashSet<String> mandatoryKeys = new HashSet<>();
         mandatoryKeys.addAll(Arrays.asList(metadataKeys));
         
@@ -51,6 +52,7 @@ public class EchoFrame extends JFrame{
         buttonPanel = new PrimaryButtonPanel();
         mdPanel = new MetadataPanel(mandatoryKeys);
         
+        // File List Panel
         listPanel = new FileListPanel();
         EchoMain.UI.echoFrame = this;
         EchoMain.UI.filePanel = listPanel;

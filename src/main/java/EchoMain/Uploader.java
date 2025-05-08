@@ -47,6 +47,11 @@ public static boolean isAudioFile(File file) {
 	return false;
 }
 
+/**
+ * 
+ * @param mode
+ * @throws IOException
+ */
 	public static void openFileBrowser(String mode) throws IOException {
 		if(mode.equals("FILE")) {
 		JFileChooser fc = new JFileChooser();
