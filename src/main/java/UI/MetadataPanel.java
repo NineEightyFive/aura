@@ -126,6 +126,9 @@ public final class MetadataPanel extends JPanel{
                 for(String value: inputValues){
                     valueBox.addItem(value);
                 }
+                if(inputValues.size() == 1){
+                    valueBox.setSelectedIndex(2);
+                }
             }
         }
         

@@ -3,6 +3,7 @@ package EchoMain;
 import UI.EchoFrame;
 import UI.FileListPanel;
 import UI.MetadataPanel;
+import UI.PrimaryButtonPanel;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.io.File;
@@ -20,6 +21,7 @@ public class UI {
         public static EchoFrame echoFrame;
 	public static FileListPanel filePanel;
         public static MetadataPanel metadataPanel;
+        public static PrimaryButtonPanel buttonPanel;
 	public static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
 	
     /**
@@ -122,6 +124,7 @@ public class UI {
             System.out.println("Refreshing Selected Files");
             int[] indices = filePanel.getSelectedIndices();
             HashSet<String> keyset = new HashSet<>();
+            HashSet<String> formatset = new HashSet<>();
             HashMap<String, ArrayList<String>> inputValues = new HashMap<>();
             for(int i: indices){
                 EMAudioFile emf = files.get(i);
@@ -136,6 +139,7 @@ public class UI {
 
 				
                 keyset.addAll(metadata.keySet());
+                formatset.add(emf.getNewFormat());
                 for(Map.Entry<String,String> entry: metadata.entrySet()){
                     inputValues.putIfAbsent(entry.getKey(), new ArrayList<String>());
                     inputValues.get(entry.getKey()).add(entry.getValue());
@@ -143,11 +147,21 @@ public class UI {
             }
             metadataPanel.setKeyset(keyset);
             metadataPanel.setInputValues(inputValues);
+            if(formatset.isEmpty()){
+                //nothing to do
+            }else if(formatset.size() == 1){
+                buttonPanel.setFormat((String)formatset.toArray()[0]);
+            }else{
+                buttonPanel.setFormat("<keep>");
+            }
         }
         
         public static void formatChanged(String format){
             System.out.println("Format changed to " + format);
-			int[] indices = filePanel.getSelectedIndices();
+            if(format.equals("<keep>")){
+                return;
+            }
+            int[] indices = filePanel.getSelectedIndices();
             for(int i: indices){
                 EMAudioFile emf = files.get(i);
                 System.out.println("File: "+ emf.getFileName());

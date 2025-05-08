@@ -27,6 +27,10 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         jStart.addActionListener(new StartListener());
     }
 
+    public void setFormat(String newFormat){
+        jFormat.setSelectedItem(newFormat);
+    }
+    
     /**
      * ActionListener for Add File Button
      */
@@ -110,7 +114,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         jStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/start.png"))); // NOI18N
         jStart.setToolTipText("Convert Files");
 
-        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mp3", "m4a", "flac", "wav", "wma", "aac", "ogg" }));
+        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<keep>", "mp3", "m4a", "flac", "wav", "wma", "aac", "ogg" }));
         jFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormatActionPerformed(evt);
@@ -140,7 +144,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(14, 14, 14)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

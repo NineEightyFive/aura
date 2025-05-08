@@ -20,20 +20,25 @@ public class MetaLink {
 	private Map<String,String> metaChangesToMake;
 	
 	public String getMeta(String type) {
-try {
-		return AudioFileIO.read(reference.getFile()).getTag().getFirst(FieldKey.valueOf(type));
-} catch(Exception e) {
-	return null;
-}
+            if(metaChangesToMake.containsKey(type)){
+                return metaChangesToMake.get(type);
+            }
+            try {
+                return AudioFileIO.read(reference.getFile()).getTag().getFirst(FieldKey.valueOf(type));
+            } catch(Exception e) {
+                return null;
+            }
 	}
 
 	public void applyMeta(String type, String value) {
 		try {
-
-			if(value==null || value.equals("<clear>")) value="";
-
-			if(value.equals("") || value.equals(" ")|| value.equals("<keep>")) return;
+                        if(value==null || value.equals("<clear>")) value="";
+                        else if(value.equals("") || value.equals(" ")|| value.equals("<keep>")) {
+                            //metaChangesToMake.remove(type);//Should this do this?
+                            return;
+                        }
 			
+	
 			System.out.println("Yep");
 
 			//AudioFileIO.read(reference.getFile()).getTag().setField(FieldKey.valueOf(type),value);

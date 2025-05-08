@@ -35,7 +35,7 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <EmptySpace pref="113" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -106,14 +106,15 @@
     <Component class="javax.swing.JComboBox" name="jFormat">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
-            <StringItem index="0" value="mp3"/>
-            <StringItem index="1" value="m4a"/>
-            <StringItem index="2" value="flac"/>
-            <StringItem index="3" value="wav"/>
-            <StringItem index="4" value="wma"/>
-            <StringItem index="5" value="aac"/>
-            <StringItem index="6" value="ogg"/>
+          <StringArray count="8">
+            <StringItem index="0" value="&lt;keep&gt;"/>
+            <StringItem index="1" value="mp3"/>
+            <StringItem index="2" value="m4a"/>
+            <StringItem index="3" value="flac"/>
+            <StringItem index="4" value="wav"/>
+            <StringItem index="5" value="wma"/>
+            <StringItem index="6" value="aac"/>
+            <StringItem index="7" value="ogg"/>
           </StringArray>
         </Property>
       </Properties>
