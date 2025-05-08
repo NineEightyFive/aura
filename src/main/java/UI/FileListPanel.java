@@ -4,16 +4,20 @@
  */
 package UI;
 
+<<<<<<< Updated upstream
 import EchoMain.*;
+=======
+//import EchoMain.EMAudioFile;
+>>>>>>> Stashed changes
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.event.ListDataListener;
-import javax.swing.event.ListDataEvent;
+//import javax.swing.event.ListDataListener;
+//import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 

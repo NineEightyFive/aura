@@ -92,7 +92,7 @@ public final class MetadataPanel extends JPanel{
         keyPanels = new HashMap<>();
         inputValues = new HashMap<>();
         outputValues = new HashMap<>();
-        setKeyset(new HashSet());
+        setKeyset(new HashSet<>());
     }
     
     
@@ -103,13 +103,13 @@ public final class MetadataPanel extends JPanel{
     private class MDSingleKeyPanel extends JPanel{
         private static final String[] defaultChoices = {"<keep>", "<clear>"};
         private final JLabel label;
-        private final JComboBox valueBox;
+        private final JComboBox<String> valueBox;
         public MDSingleKeyPanel(String key){
             //this.setLayout(new FlowLayout(FlowLayout.TRAILING));
             this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
             label = new JLabel(key);
             label.setMinimumSize(new Dimension(80,20));
-            valueBox = new JComboBox(defaultChoices);
+            valueBox = new JComboBox<>(defaultChoices);
             valueBox.setEditable(true);
             valueBox.addActionListener(new MetadataComboBoxListener(key));
             valueBox.setMaximumSize(new Dimension(160,20));
@@ -147,7 +147,8 @@ public final class MetadataPanel extends JPanel{
         
         @Override
         public void actionPerformed(ActionEvent e){
-            JComboBox valueBox = (JComboBox)e.getSource();
+            @SuppressWarnings("unchecked")
+            JComboBox<String> valueBox = (JComboBox<String>)e.getSource();
             String value = (String)valueBox.getSelectedItem();
             metadataChangedByUI(key, value);
         }
