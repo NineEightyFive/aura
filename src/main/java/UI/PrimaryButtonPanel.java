@@ -92,21 +92,23 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         jAddFldr = new javax.swing.JButton();
         jClrAll = new javax.swing.JButton();
         jStart = new javax.swing.JButton();
-        jStop = new javax.swing.JButton();
         jFormat = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
-        jAddFile.setText("Add File");
+        jAddFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addfile.png"))); // NOI18N
+        jAddFile.setToolTipText("Add File");
 
-        jRmvFile.setText("Remove File");
+        jRmvFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/removefile.png"))); // NOI18N
+        jRmvFile.setToolTipText("Remove File");
 
-        jAddFldr.setText("Add Folder");
+        jAddFldr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folderadd.png"))); // NOI18N
+        jAddFldr.setToolTipText("Add Folder");
 
-        jClrAll.setText("Clear File/Folder List");
+        jClrAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteall.png"))); // NOI18N
+        jClrAll.setToolTipText("Clear File List");
 
-        jStart.setText("Start");
-
-        jStop.setText("Stop");
+        jStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/start.png"))); // NOI18N
+        jStart.setToolTipText("Convert Files");
 
         jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mp3", "m4a", "flac", "wav", "wma", "aac", "ogg" }));
         jFormat.addActionListener(new java.awt.event.ActionListener() {
@@ -123,54 +125,39 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
+                .addComponent(jAddFile)
+                .addGap(18, 18, 18)
+                .addComponent(jRmvFile)
+                .addGap(18, 18, 18)
+                .addComponent(jAddFldr)
+                .addGap(18, 18, 18)
+                .addComponent(jClrAll)
+                .addGap(18, 18, 18)
+                .addComponent(jStart)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jStart)
-                                .addGap(18, 18, 18)
-                                .addComponent(jStop))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jAddFldr)
-                                .addGap(18, 18, 18)
-                                .addComponent(jClrAll)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jAddFile)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRmvFile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(42, 42, 42))))))
+                    .addComponent(jFormat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(14, 14, 14)))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jAddFile)
-                            .addComponent(jRmvFile))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jAddFldr)
-                            .addComponent(jClrAll))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jStart)
-                            .addComponent(jStop)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jAddFile)
+                        .addComponent(jRmvFile))
+                    .addComponent(jAddFldr)
+                    .addComponent(jClrAll)
+                    .addComponent(jStart))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,6 +174,5 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jRmvFile;
     private javax.swing.JButton jStart;
-    private javax.swing.JButton jStop;
     // End of variables declaration//GEN-END:variables
 }

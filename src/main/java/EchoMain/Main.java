@@ -24,7 +24,7 @@ public class Main {
 		// Run initalization of program, start UI, etc.
 		// This will run when the app is started.
                 EchoFrame ef = new EchoFrame();
-                ef.setSize(512, 512);
+                ef.setSize(576, 512);
                 ef.setTitle("Echo Master");
                 ef.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 ef.setVisible(true);
