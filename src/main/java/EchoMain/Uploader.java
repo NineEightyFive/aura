@@ -104,9 +104,4 @@ public static boolean isAudioFile(File file) {
 		return null;
 	}
 
-public static void main(String[] args) throws Exception {
-		System.out.println("I will open the file chooser");
-            openFileBrowser("FOLDER");   
-	}
-
 }
