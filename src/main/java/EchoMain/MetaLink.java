@@ -34,16 +34,9 @@ public class MetaLink {
 		try {
                         if(value==null || value.equals("<clear>")) value="";
                         else if(value.equals("") || value.equals(" ")|| value.equals("<keep>")) {
-                            //metaChangesToMake.remove(type);//Should this do this?
                             return;
                         }
-			
-	
-			System.out.println("Yep");
-
-			//AudioFileIO.read(reference.getFile()).getTag().setField(FieldKey.valueOf(type),value);
 			metaChangesToMake.put(type, value);
-			System.out.println("Yup");
 	} catch(Exception e) { e.printStackTrace();
 	}	
 		}

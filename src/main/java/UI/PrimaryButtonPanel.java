@@ -114,7 +114,7 @@ public class PrimaryButtonPanel extends javax.swing.JPanel {
         jStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/start.png"))); // NOI18N
         jStart.setToolTipText("Convert Files");
 
-        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<keep>", "mp3", "m4a", "flac", "wav", "wma", "aac", "ogg" }));
+        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<keep>", "mp3", "m4a", "flac", "wav", "ogg"}));
         jFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormatActionPerformed(evt);

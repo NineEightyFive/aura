@@ -21,7 +21,7 @@ public class Uploader {
 	String type;
 	
 
-public static final String[] allowedTypes = {"wav","flac","mp3","m4a","mp4","mkv","aiff","aac","ogg","wma","mpeg","x-flac"};
+public static final String[] allowedTypes = {"wav","flac","mp3","m4a","mp4","mkv","aiff","ogg","mpeg","x-flac"};
 
 public static boolean isValidFormat(String ext) {
 	for(int i=0; i<allowedTypes.length;i++) {
