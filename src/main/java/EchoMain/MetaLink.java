@@ -71,16 +71,17 @@ public class MetaLink {
                     targetTag.setField(fieldKey, sourceTag.getValue(fieldKey,0));
                 }
             }*/
-			System.out.println("C");
 			for(Map.Entry<String,String> entry : metaChangesToMake.entrySet()) {
-
-
-					System.out.println((FieldKey.valueOf(entry.getKey())));
+					/*System.out.println((FieldKey.valueOf(entry.getKey())));
 					System.out.println(targetTag.hasField(FieldKey.valueOf(entry.getKey())));
 					System.out.println(entry.getValue());
-
+					*/
 				//if (targetTag.hasField(FieldKey.valueOf(entry.getKey()))) {
+				try {
 					targetTag.setField(FieldKey.valueOf(entry.getKey()), entry.getValue());
+				} catch (Exception eee) { // If for any reason a value is no compatable, it will skip it upon error
+					System.out.println(eee);
+				}
 				//}
 			}
 
