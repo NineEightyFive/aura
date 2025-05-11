@@ -39,7 +39,7 @@ public class ConvertEngine {
 		
 		String original = f.getName();
 		String baseN = original.contains(".") ? original.substring(0,original.lastIndexOf(".")) : original;
-		return baseN + "." + (src.getNewFormat() != null ? src.getNewFormat() : "mp3"); // If no new format is selected, default to mp3
+		return baseN + "." + (src.getNewFormat() != null ? src.getNewFormat() : getOldFormat(src)); // If no new format is selected, default to mp3
 	}
 
 	/**
@@ -74,11 +74,11 @@ public class ConvertEngine {
 				File source = new File(af.getPath());		                 
 				File target = getTargetSrc(source,af);     
 
-				System.out.println(getOldFormat(af));
-				System.out.println(af.getNewFormat());
-				System.out.println(!getOldFormat(af).equals(af.getNewFormat()));
+				//System.out.println(getOldFormat(af));
+				//System.out.println(af.getNewFormat());
+				//System.out.println(!getOldFormat(af).equals(af.getNewFormat()));
 
-				if(!getOldFormat(af).equals(af.getNewFormat())) { // Used to check if file formats are same, only metadata changes?
+				if(af.getNewFormat()!=null && !getOldFormat(af).equals(af.getNewFormat())) { // Used to check if file formats are same, only metadata changes?
 
 				//Audio Attributes                                       
 				AudioAttributes audio = new AudioAttributes();                                           
