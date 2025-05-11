@@ -26,8 +26,7 @@ public class ConvertEngine {
 	 */
 	public static String getOldFormat(EMAudioFile src) {
 		String original = src.getFile().getName();
-		String baseN = original.contains(".") ? original.substring(0,original.lastIndexOf(".")) : original;
-		return baseN;
+		return original.contains(".") ? original.substring(original.lastIndexOf(".")+1,original.length()) : original;
 	}
 
 	/**
@@ -37,6 +36,7 @@ public class ConvertEngine {
 	 * @return String path of new file with correct extension, defaults to mp3 if no option is found or invalid
 	 */
 	public static String newFileName(File f, EMAudioFile src) {
+		
 		String original = f.getName();
 		String baseN = original.contains(".") ? original.substring(0,original.lastIndexOf(".")) : original;
 		return baseN + "." + (src.getNewFormat() != null ? src.getNewFormat() : "mp3"); // If no new format is selected, default to mp3
@@ -73,6 +73,10 @@ public class ConvertEngine {
 
 				File source = new File(af.getPath());		                 
 				File target = getTargetSrc(source,af);     
+
+				System.out.println(getOldFormat(af));
+				System.out.println(af.getNewFormat());
+				System.out.println(!getOldFormat(af).equals(af.getNewFormat()));
 
 				if(!getOldFormat(af).equals(af.getNewFormat())) { // Used to check if file formats are same, only metadata changes?
 

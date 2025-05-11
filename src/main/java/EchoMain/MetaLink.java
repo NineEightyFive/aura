@@ -64,19 +64,9 @@ public class MetaLink {
 
 			Tag sourceTag = sourceFileIO.getTag();
 			Tag targetTag = targetFileIO.getTag();
-			/* 
-			for (FieldKey fieldKey : FieldKey.values()) {
-                if (sourceTag.hasField(fieldKey)) {
-					System.out.println("B");
-                    targetTag.setField(fieldKey, sourceTag.getValue(fieldKey,0));
-                }
-            }*/
+
 			for(Map.Entry<String,String> entry : metaChangesToMake.entrySet()) {
-					/*System.out.println((FieldKey.valueOf(entry.getKey())));
-					System.out.println(targetTag.hasField(FieldKey.valueOf(entry.getKey())));
-					System.out.println(entry.getValue());
-					*/
-				//if (targetTag.hasField(FieldKey.valueOf(entry.getKey()))) {
+
 				try {
 					targetTag.setField(FieldKey.valueOf(entry.getKey()), entry.getValue());
 				} catch (Exception eee) { // If for any reason a value is no compatable, it will skip it upon error
