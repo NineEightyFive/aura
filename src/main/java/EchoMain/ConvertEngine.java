@@ -100,7 +100,7 @@ public class ConvertEngine {
 
 			}
 			
-		}
+		} // Processed #/# files!\nErrors: #
 		UI.sendNotification("gen", "Processed "+filesDone+"/"+files.size()+" files!\nErrors: "+(files.size()-filesDone));
 	}
 
