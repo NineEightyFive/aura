@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package UI;
 
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -17,16 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 /**
  *
  * @author Dan Bennett-Jeffreys
  */
 @SuppressWarnings("unused")
 public final class MetadataPanel extends JPanel{
-    /*private String name;
-    private JTextField label;
-    private JComboBox metadata;*/
     private final HashSet<String> mandatoryKeyset;
     private HashSet<String> keys;
     private HashMap<String,MDSingleKeyPanel> keyPanels;

@@ -23,4 +23,32 @@
     <version>3.0.1</version>
 </dependency>
 </dependencies>
+  <build>
+        <plugins>
+            <!-- Maven Shade Plugin: build a fat JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <!-- Replace EchoMain.Main with your actual entry point class -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>EchoMain.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                            <!-- Optional: give the fat JAR a clean name -->
+                            <finalName>EchoMaster</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

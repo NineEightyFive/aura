@@ -25,7 +25,7 @@
               <Component id="jAddFldr" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jClrAll" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jStart" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -35,7 +35,9 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="113" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jCustomPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,7 +49,10 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jFormat" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFormat" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCustomPanel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jAddFile" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -55,7 +60,7 @@
                   </Group>
                   <Component id="jAddFldr" min="-2" max="-2" attributes="0"/>
                   <Component id="jClrAll" min="-2" max="-2" attributes="0"/>
-                  <Component id="jStart" min="-2" max="-2" attributes="0"/>
+                  <Component id="jStart" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
@@ -95,12 +100,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Clear File List"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jStart">
+    <Component class="javax.swing.JButton" name="jCustomPanel">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/img/start.png"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Convert Files"/>
+        <Property name="text" type="java.lang.String" value="Custom Metadata Panel"/>
+        <Property name="toolTipText" type="java.lang.String" value="Custom Meta"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jFormat">
@@ -128,6 +131,14 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Format"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jStart">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/start.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Convert Files"/>
       </Properties>
     </Component>
   </SubComponents>

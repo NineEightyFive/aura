@@ -57,6 +57,13 @@ public class UI {
                 JOptionPane.showMessageDialog(echoFrame, msg, title, messageType);
 	}
 	
+    public static int sendOptionsDialog(String title, String msg, String c1, String c2) {
+
+        int choice = JOptionPane.showConfirmDialog(echoFrame, msg, title, JOptionPane.YES_NO_CANCEL_OPTION);
+
+        return choice;
+    }
+
     /**
      * Executes the converter engine to start the conversion process
      * @param filesToConvert Full list of files to run conversion on
@@ -67,6 +74,8 @@ public class UI {
 		System.out.println("-- STARTING CONVERSION PROCESS --");
 		ConvertEngine.convert(filesToConvert);
 	}
+        
+
 	
 	public static void doUpload(File f) {
 
@@ -108,6 +117,10 @@ public class UI {
                 System.out.println("File: "+ emf.getFileName());
                 emf.getMetaLink().applyMeta(key, value);
             }
+        }
+
+        public static int[] getPanelIndices() {
+            return filePanel.getSelectedIndices();
         }
         
 		static String[] metadataKeys = {
