@@ -1,4 +1,4 @@
-package EchoMain;
+package AuraMain;
 
 import UI.EchoFrame;
 import UI.FileListPanel;
@@ -7,22 +7,21 @@ import UI.PrimaryButtonPanel;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import ws.schild.jave.info.MultimediaInfo;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
+import UI.ProgressFrame;
+
 @SuppressWarnings("unused")
 public class UI {
+    private static JFrame mainFrame;
         public static EchoFrame echoFrame;
-	public static FileListPanel filePanel;
+	    public static FileListPanel filePanel;
         public static MetadataPanel metadataPanel;
         public static PrimaryButtonPanel buttonPanel;
-	public static ArrayList<EMAudioFile> files = new ArrayList<EMAudioFile>();
+	public static ArrayList<EMAudioFile> files = new ArrayList<>();
 	
     /**
      * 
@@ -58,10 +57,7 @@ public class UI {
 	}
 	
     public static int sendOptionsDialog(String title, String msg, String c1, String c2) {
-
-        int choice = JOptionPane.showConfirmDialog(echoFrame, msg, title, JOptionPane.YES_NO_CANCEL_OPTION);
-
-        return choice;
+        return JOptionPane.showConfirmDialog(echoFrame, msg, title, JOptionPane.YES_NO_CANCEL_OPTION);
     }
 
     /**
@@ -69,13 +65,29 @@ public class UI {
      * @param filesToConvert Full list of files to run conversion on
      */
 	public static void doConvert(ArrayList<EMAudioFile> filesToConvert) {
-		if(filesToConvert.size()==0) {
+		if(filesToConvert.isEmpty()) {
 			UI.sendNotification("err", "Converter Failed As There Are No Files To Convert"); return; }
 		System.out.println("-- STARTING CONVERSION PROCESS --");
-		ConvertEngine.convert(filesToConvert);
-	}
-        
+		//ConvertEngine.convert(filesToConvert);
+        ProgressFrame progressFrame = new ProgressFrame(mainFrame);
+        ConverterThread worker = new ConverterThread(filesToConvert, progressFrame.getProgressBar(), progressFrame.getCancel());
+        worker.addPropertyChangeListener(evt -> {
+            if ("state".equals(evt.getPropertyName()) && evt.getNewValue() == SwingWorker.StateValue.DONE) {
+                progressFrame.closeDialog();
+            }
+        });
+        worker.execute();
 
+        progressFrame.setVisible(true);
+
+
+
+
+	}
+
+    public static void setMainFrame(JFrame frame) {
+        mainFrame = frame;
+    }
 	
 	public static void doUpload(File f) {
 
@@ -195,7 +207,7 @@ public class UI {
 
 	public static ArrayList<EMAudioFile> getSelectedFilesInList(ArrayList<String> list) {
 
-		ArrayList<EMAudioFile> toReturn = new ArrayList<EMAudioFile>();
+		ArrayList<EMAudioFile> toReturn = new ArrayList<>();
 
 		for(String f : list) {
 			if(checkIfIn(f)!=null) toReturn.add(checkIfIn(f));

@@ -1,20 +1,12 @@
 //java swing filechooser
-package EchoMain;
-
-import UI.MetadataPanel;
+package AuraMain;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.swing.JFileChooser;
-import javax.swing.SwingUtilities;
-import javax.swing.filechooser.*;
-
-import java.util.Arrays;
-import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class Uploader {

@@ -69,7 +69,7 @@ public class FileListPanel extends JPanel{
 
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            EchoMain.UI.refreshSelection();
+            AuraMain.UI.refreshSelection();
         }
         
     }

@@ -7,7 +7,7 @@ package UI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import javax.swing.ImageIcon;
-import EchoMain.*;
+import AuraMain.*;
 
 import javax.swing.*;
 
@@ -146,7 +146,7 @@ public class PrimaryButtonPanel extends JPanel {
             }
         });
 
-        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<keep>", "mp3", "m4a", "flac", "wav", "wma", "aac", "ogg" }));
+        jFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<keep>", "mp3", "ogg", "flac", "wav", "aac" }));
         jFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormatActionPerformed(evt);

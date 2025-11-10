@@ -1,14 +1,10 @@
-package EchoMain;
+package AuraMain;
 
 import java.io.File;
 
-import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.info.MultimediaInfo;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Consumer;
 import ws.schild.jave.EncoderException;
 
 /*

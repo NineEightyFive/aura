@@ -31,7 +31,7 @@ public class CustomMetaPnl extends JFrame{
         applyButton.addActionListener(e -> {
 
             for(Map.Entry<FieldKey, String> entry : pendingChanges.entrySet()){
-                EchoMain.UI.setSingleMetadata(entry.getKey().name(),entry.getValue());
+                AuraMain.UI.setSingleMetadata(entry.getKey().name(),entry.getValue());
             }
 
         });

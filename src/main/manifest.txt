@@ -1,1 +1,1 @@
-Main-Class: EchoMain.Main
+Main-Class: AuraMain.Main

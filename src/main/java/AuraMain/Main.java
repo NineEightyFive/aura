@@ -1,35 +1,24 @@
-package EchoMain;
+package AuraMain;
 
 import UI.EchoFrame;
 import UI.MetadataPanel;
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.FieldKey;
-import java.util.Arrays;
-import javax.swing.JFrame;
-import java.awt.Color;
-import java.awt.Container;
-
-import java.util.Arrays;
 
 import javax.swing.JFrame;
-import ws.schild.jave.Encoder;
-import ws.schild.jave.MultimediaObject;
 
 @SuppressWarnings("unused")
 public class Main {
-
+    private static EchoFrame ef;
     /**
      * Initialization Function for EchoMaster, runs and sets the window up
      */
     public static void init() {
         // Run initialization of program, start UI, etc.
-        EchoFrame ef = new EchoFrame();
+        ef = new EchoFrame();
         ef.setSize(550, 400);
         ef.setTitle("Echo Master");
         ef.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ef.setVisible(true);
+        UI.setMainFrame(ef);
         System.out.println("EchoFrame initialized: " + ef);
     }
 

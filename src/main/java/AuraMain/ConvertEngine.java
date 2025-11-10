@@ -1,4 +1,4 @@
-package EchoMain;
+package AuraMain;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,12 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
-
-import ws.schild.jave.Encoder;
-import ws.schild.jave.EncoderException;
-import ws.schild.jave.MultimediaObject;
-import ws.schild.jave.encode.AudioAttributes;
-import ws.schild.jave.encode.EncodingAttributes;
 
 import java.nio.file.Path;
 
@@ -128,8 +122,10 @@ public class ConvertEngine {
 	 */
 	public static void convert(ArrayList<EMAudioFile> files) {
 
-		int filesDone = 0; // # of files converted, used to calculate amount of errors
 
+
+		//int filesDone = 0; // # of files converted, used to calculate amount of errors
+/*
 		for(EMAudioFile af : files) {
 
 			try {
@@ -177,11 +173,9 @@ public class ConvertEngine {
 
                 UI.sendNotification("err","Error when converting file: "+e);
 
-			}
+			}*/
 			
 		} // Processed #/# files!\nErrors: #
-		UI.sendNotification("gen", "Processed "+filesDone+"/"+files.size()+" files!\nErrors: "+(files.size()-filesDone));
+		//UI.sendNotification("gen", "Processed "+filesDone+"/"+files.size()+" files!\nErrors: "+(files.size()-filesDone));
 	}
-
-}
 

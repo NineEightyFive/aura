@@ -1,16 +1,13 @@
-package EchoMain;
+package AuraMain;
 
 import java.util.Map;
 import java.util.HashMap;
 
-import ws.schild.jave.info.MultimediaInfo;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.FieldKey;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 @SuppressWarnings("unused")
 public class MetaLink {

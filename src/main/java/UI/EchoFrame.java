@@ -5,20 +5,9 @@
 package UI;
 
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JList;
 
 
 /**
@@ -54,10 +43,10 @@ public class EchoFrame extends JFrame{
         
         // File List Panel
         listPanel = new FileListPanel();
-        EchoMain.UI.echoFrame = this;
-        EchoMain.UI.filePanel = listPanel;
-        EchoMain.UI.metadataPanel = mdPanel;
-        EchoMain.UI.buttonPanel = buttonPanel;
+        AuraMain.UI.echoFrame = this;
+        AuraMain.UI.filePanel = listPanel;
+        AuraMain.UI.metadataPanel = mdPanel;
+        AuraMain.UI.buttonPanel = buttonPanel;
         this.add(buttonPanel, BorderLayout.PAGE_START);
         this.add(mdPanel, BorderLayout.CENTER);
         this.add(listPanel, BorderLayout.LINE_START);
