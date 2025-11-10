@@ -4,7 +4,7 @@
  */
 package UI;
 
-import java.awt.Dimension;
+import java.awt.*;
 //import java.util.ArrayList;
 //import java.util.List;
 import javax.swing.DefaultListModel;
@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 //import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.Color;
 
 /**
  *
@@ -25,6 +26,7 @@ public class FileListPanel extends JPanel{
     private JList<String> fileList;
     private DefaultListModel<String> fileListModel;
     public FileListPanel(){
+        this.setBackground(new Color(236,220,118));
         fileListModel = new DefaultListModel<>();
         fileList = new JList<>(fileListModel);
         fileList.addListSelectionListener(new FileListSelectionListener());

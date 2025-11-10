@@ -1,8 +1,9 @@
 package UI;
 
-import java.awt.Dimension;
+import java.awt.*;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -83,6 +84,7 @@ public final class MetadataPanel extends JPanel{
         inputValues = new HashMap<>();
         outputValues = new HashMap<>();
         setKeyset(new HashSet<>());
+        this.setBackground(new Color(236,220,118));
     }
     
     
@@ -99,10 +101,12 @@ public final class MetadataPanel extends JPanel{
             this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
             label = new JLabel(key);
             label.setMinimumSize(new Dimension(80,20));
+            label.setBorder(new EmptyBorder(10, 10, 10, 10));
             valueBox = new JComboBox<>(defaultChoices);
             valueBox.setEditable(true);
             valueBox.addActionListener(new MetadataComboBoxListener(key));
             valueBox.setMaximumSize(new Dimension(160,20));
+            this.setBackground(new Color(236,220,118));
             this.add(label);
             this.add(valueBox);
         }

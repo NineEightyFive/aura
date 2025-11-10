@@ -7,6 +7,9 @@ import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.FieldKey;
 import java.util.Arrays;
+import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Container;
 
 import java.util.Arrays;
 
@@ -23,7 +26,7 @@ public class Main {
     public static void init() {
         // Run initialization of program, start UI, etc.
         EchoFrame ef = new EchoFrame();
-        ef.setSize(576, 512);
+        ef.setSize(550, 400);
         ef.setTitle("Echo Master");
         ef.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ef.setVisible(true);

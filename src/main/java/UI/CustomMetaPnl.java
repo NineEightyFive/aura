@@ -3,19 +3,16 @@ package UI;
 import javax.swing.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.FieldKey;
 
 public class CustomMetaPnl extends JFrame{
     private JComboBox<FieldKey> dataOptions;
     private JLabel fileSelected;
     private JTextField dataValue;
+    private JTextField filePathField;
     private JButton applyButton;
     private JButton cancelButton;
     private JPanel metaPanel;
