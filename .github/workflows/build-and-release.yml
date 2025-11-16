@@ -1,18 +1,16 @@
 name: Build & Release AURA (unsigned)
 
-# Run only on tag pushes like v1.0.0
 on:
   push:
     tags:
       - 'v*'
 
-# Allow release creation / upload
 permissions:
   contents: write
 
 env:
   APP_NAME: "AURA"
-  MAIN_JAR: "Aura.jar"
+  MAIN_JAR: "EchoMaster.jar"
   MAIN_CLASS: "AuraMain.Main"
   OUTPUT_DIR: output
 
@@ -20,9 +18,6 @@ jobs:
   build-windows:
     runs-on: windows-latest
     name: Build Windows EXE
-    env:
-      TAG: ${{ github.ref_name }}
-      APPVER_STRIPPED: ${{ github.ref_name && github.ref_name.startsWith('v') && github.ref_name.slice(1) || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,11 +28,23 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Determine version from tag (Windows)
+        shell: pwsh
+        run: |
+          # GITHUB_REF is like refs/tags/v1.2.3
+          $tag = $env:GITHUB_REF.Split('/')[-1]
+          $stripped = $tag.TrimStart('v')
+          Write-Host "Tag: $tag"
+          Write-Host "Stripped: $stripped"
+          Add-Content -Path $env:GITHUB_ENV -Value "APPVER_STRIPPED=$stripped"
+
       - name: Maven package (create fat JAR)
         run: mvn -B clean package
 
-      - name: Create output folder
-        run: mkdir -Force ${env:OUTPUT_DIR}
+      - name: Ensure output directory exists (Windows)
+        shell: pwsh
+        run: |
+          if (-not (Test-Path -Path $env:OUTPUT_DIR)) { New-Item -ItemType Directory -Path $env:OUTPUT_DIR | Out-Null }
 
       - name: Run jpackage (Windows)
         shell: pwsh
@@ -57,14 +64,12 @@ jobs:
             --verbose
 
       - name: List output files (Windows)
-        run: dir ${env:OUTPUT_DIR}
+        shell: pwsh
+        run: dir $env:OUTPUT_DIR
 
   build-macos:
     runs-on: macos-latest
     name: Build macOS DMG
-    env:
-      TAG: ${{ github.ref_name }}
-      APPVER_STRIPPED: ${{ github.ref_name && github.ref_name.startsWith('v') && github.ref_name.slice(1) || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -75,11 +80,20 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Determine version from tag (macOS)
+        run: |
+          # GITHUB_REF is like refs/tags/v1.2.3
+          TAG="${GITHUB_REF##*/}"
+          STRIPPED="${TAG#v}"
+          echo "Tag: $TAG"
+          echo "Stripped: $STRIPPED"
+          echo "APPVER_STRIPPED=$STRIPPED" >> $GITHUB_ENV
+
       - name: Maven package (create fat JAR)
         run: mvn -B clean package
 
-      - name: Create output folder
-        run: mkdir -p ${{ env.OUTPUT_DIR }}
+      - name: Ensure output directory exists (macOS)
+        run: mkdir -p "${OUTPUT_DIR}"
 
       - name: Run jpackage (macOS)
         run: |
@@ -95,14 +109,11 @@ jobs:
             --verbose
 
       - name: List output files (macOS)
-        run: ls -la ${{ env.OUTPUT_DIR }}
+        run: ls -la "${{ env.OUTPUT_DIR }}"
 
   build-linux:
     runs-on: ubuntu-latest
     name: Build Linux App Image (tar.gz)
-    env:
-      TAG: ${{ github.ref_name }}
-      APPVER_STRIPPED: ${{ github.ref_name && github.ref_name.startsWith('v') && github.ref_name.slice(1) || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -113,11 +124,19 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Determine version from tag (Linux)
+        run: |
+          TAG="${GITHUB_REF##*/}"
+          STRIPPED="${TAG#v}"
+          echo "Tag: $TAG"
+          echo "Stripped: $STRIPPED"
+          echo "APPVER_STRIPPED=$STRIPPED" >> $GITHUB_ENV
+
       - name: Maven package (create fat JAR)
         run: mvn -B clean package
 
-      - name: Create output folder
-        run: mkdir -p ${{ env.OUTPUT_DIR }}
+      - name: Ensure output directory exists (Linux)
+        run: mkdir -p "${OUTPUT_DIR}"
 
       - name: Run jpackage (Linux app image)
         run: |
@@ -133,14 +152,14 @@ jobs:
 
       - name: Create tar.gz from app image
         run: |
-          cd ${{ env.OUTPUT_DIR }}
-          # find directory produced by jpackage (AURA.app or AURA)
-          APPDIR=$(ls -1 | grep -i '^${{ env.APP_NAME }}' | head -n 1)
+          cd "${{ env.OUTPUT_DIR }}"
+          APPDIR=$(ls -1 | grep -i '^${{ env.APP_NAME }}' | head -n 1 || echo "")
+          if [ -z "$APPDIR" ]; then APPDIR=$(ls -1 | head -n 1); fi
           tar -czvf "${{ env.APP_NAME }}-linux-${{ env.APPVER_STRIPPED }}.tar.gz" "$APPDIR"
           cd ..
 
       - name: List output files (Linux)
-        run: ls -la ${{ env.OUTPUT_DIR }}
+        run: ls -la "${{ env.OUTPUT_DIR }}"
 
   release:
     needs: [build-windows, build-macos, build-linux]
@@ -150,16 +169,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Gather artifacts and create release
-        env:
-          TAG: ${{ github.ref_name }}
-          STRIPPED: ${{ github.ref_name && github.ref_name.startsWith('v') && github.ref_name.slice(1) || github.ref_name }}
+      - name: Show output directory contents
         run: |
-          echo "Release tag: $TAG"
-          echo "Stripped version: $STRIPPED"
-          # Ensure output dir exists and list content
+          echo "Release tag: $GITHUB_REF"
           ls -la output || true
-        # Upload all files in output/ using softprops action in the next step
 
       - name: Create or upload release and assets
         uses: softprops/action-gh-release@v1
