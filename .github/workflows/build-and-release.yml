@@ -10,7 +10,7 @@ permissions:
 
 env:
   APP_NAME: "AURA"
-  MAIN_JAR: "Aura.jar"
+  MAIN_JAR: "AURA.jar"
   MAIN_CLASS: "AuraMain.Main"
   OUTPUT_DIR: output
 

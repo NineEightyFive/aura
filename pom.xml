@@ -44,7 +44,7 @@
                                 </transformer>
                             </transformers>
                             <!-- Optional: give the fat JAR a clean name -->
-                            <finalName>EchoMaster</finalName>
+                            <finalName>AURA</finalName>
                         </configuration>
                     </execution>
                 </executions>
