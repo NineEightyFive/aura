@@ -10,45 +10,36 @@ permissions:
 
 env:
   APP_NAME: "AURA"
-  MAIN_JAR: "EchoMaster.jar"
+  MAIN_JAR: "Aura.jar"
   MAIN_CLASS: "AuraMain.Main"
   OUTPUT_DIR: output
 
 jobs:
   build-windows:
     runs-on: windows-latest
-    name: Build Windows EXE
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Setup JDK 21
-        uses: actions/setup-java@v4
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Determine version from tag (Windows)
+      - name: Determine version
         shell: pwsh
         run: |
-          # GITHUB_REF is like refs/tags/v1.2.3
           $tag = $env:GITHUB_REF.Split('/')[-1]
           $stripped = $tag.TrimStart('v')
-          Write-Host "Tag: $tag"
-          Write-Host "Stripped: $stripped"
           Add-Content -Path $env:GITHUB_ENV -Value "APPVER_STRIPPED=$stripped"
 
-      - name: Maven package (create fat JAR)
+      - name: Maven package
         run: mvn -B clean package
 
-      - name: Ensure output directory exists (Windows)
+      - name: Build EXE
         shell: pwsh
         run: |
-          if (-not (Test-Path -Path $env:OUTPUT_DIR)) { New-Item -ItemType Directory -Path $env:OUTPUT_DIR | Out-Null }
-
-      - name: Run jpackage (Windows)
-        shell: pwsh
-        run: |
+          mkdir $env:OUTPUT_DIR
           jpackage `
             --name "${{ env.APP_NAME }}" `
             --app-version "${{ env.APPVER_STRIPPED }}" `
@@ -63,40 +54,34 @@ jobs:
             --win-menu `
             --verbose
 
-      - name: List output files (Windows)
-        shell: pwsh
-        run: dir $env:OUTPUT_DIR
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: output/*
 
   build-macos:
     runs-on: macos-latest
-    name: Build macOS DMG
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Setup JDK 21
-        uses: actions/setup-java@v4
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Determine version from tag (macOS)
+      - name: Determine version
         run: |
-          # GITHUB_REF is like refs/tags/v1.2.3
           TAG="${GITHUB_REF##*/}"
           STRIPPED="${TAG#v}"
-          echo "Tag: $TAG"
-          echo "Stripped: $STRIPPED"
           echo "APPVER_STRIPPED=$STRIPPED" >> $GITHUB_ENV
 
-      - name: Maven package (create fat JAR)
-        run: mvn -B clean package
+      - run: mvn -B clean package
 
-      - name: Ensure output directory exists (macOS)
-        run: mkdir -p "${OUTPUT_DIR}"
-
-      - name: Run jpackage (macOS)
+      - name: Build DMG
         run: |
+          mkdir -p "${OUTPUT_DIR}"
           jpackage \
             --name "${{ env.APP_NAME }}" \
             --app-version "${{ env.APPVER_STRIPPED }}" \
@@ -104,42 +89,38 @@ jobs:
             --main-jar ${{ env.MAIN_JAR }} \
             --main-class ${{ env.MAIN_CLASS }} \
             --type dmg \
-            --dest "${{ env.OUTPUT_DIR }}" \
+            --dest "${OUTPUT_DIR}" \
             --icon src/main/resources/img/appicon.icns \
             --verbose
 
-      - name: List output files (macOS)
-        run: ls -la "${{ env.OUTPUT_DIR }}"
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-installer
+          path: output/*
 
   build-linux:
     runs-on: ubuntu-latest
-    name: Build Linux App Image (tar.gz)
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Setup JDK 21
-        uses: actions/setup-java@v4
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Determine version from tag (Linux)
+      - name: Determine version
         run: |
           TAG="${GITHUB_REF##*/}"
           STRIPPED="${TAG#v}"
-          echo "Tag: $TAG"
-          echo "Stripped: $STRIPPED"
           echo "APPVER_STRIPPED=$STRIPPED" >> $GITHUB_ENV
 
-      - name: Maven package (create fat JAR)
-        run: mvn -B clean package
+      - run: mvn -B clean package
 
-      - name: Ensure output directory exists (Linux)
-        run: mkdir -p "${OUTPUT_DIR}"
-
-      - name: Run jpackage (Linux app image)
+      - name: Build Linux App Image
         run: |
+          mkdir -p "${OUTPUT_DIR}"
           jpackage \
             --name "${{ env.APP_NAME }}" \
             --app-version "${{ env.APPVER_STRIPPED }}" \
@@ -147,34 +128,47 @@ jobs:
             --main-jar ${{ env.MAIN_JAR }} \
             --main-class ${{ env.MAIN_CLASS }} \
             --type app-image \
-            --dest "${{ env.OUTPUT_DIR }}" \
+            --dest "${OUTPUT_DIR}" \
             --verbose
+          
+          cd "${OUTPUT_DIR}"
+          tar -czvf "AURA-linux-${APPVER_STRIPPED}.tar.gz" AURA.app || true
 
-      - name: Create tar.gz from app image
-        run: |
-          cd "${{ env.OUTPUT_DIR }}"
-          APPDIR=$(ls -1 | grep -i '^${{ env.APP_NAME }}' | head -n 1 || echo "")
-          if [ -z "$APPDIR" ]; then APPDIR=$(ls -1 | head -n 1); fi
-          tar -czvf "${{ env.APP_NAME }}-linux-${{ env.APPVER_STRIPPED }}.tar.gz" "$APPDIR"
-          cd ..
-
-      - name: List output files (Linux)
-        run: ls -la "${{ env.OUTPUT_DIR }}"
+      - name: Upload Linux Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-installer
+          path: output/*
 
   release:
-    needs: [build-windows, build-macos, build-linux]
     runs-on: ubuntu-latest
-    name: Create GitHub Release and upload installers
+    needs: [build-windows, build-macos, build-linux]
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Show output directory contents
-        run: |
-          echo "Release tag: $GITHUB_REF"
-          ls -la output || true
+      - name: Download Windows Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-installer
+          path: output
 
-      - name: Create or upload release and assets
+      - name: Download macOS Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-installer
+          path: output
+
+      - name: Download Linux Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-installer
+          path: output
+
+      - name: List files for release
+        run: ls -R output
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: output/*
