@@ -1,4 +1,4 @@
-name: Build Installers
+name: Build AURA Installers
 
 on:
   push:
@@ -10,221 +10,228 @@ permissions:
 
 env:
   APP_NAME: AURA
+  MAIN_JAR: AURA.jar
   MAIN_CLASS: AuraMain.Main
+  OUTPUT_DIR: output
 
 jobs:
 
-  # ------------------------------------------------------------
-  # 1) macOS Intel
-  # ------------------------------------------------------------
-  macos-intel:
-    runs-on: macos-12
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup JDK 21 (Intel)
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-
-      - name: Build with Maven
-        run: mvn -B -DskipTests package
-
-      - name: Debug target directory
-        run: ls -la target || true
-
-      - name: Locate & rename JAR
-        run: |
-          echo "Files in target/:"
-          ls -la target || true
-          if ls target/*-jar-with-dependencies.jar 1> /dev/null 2>&1; then
-            JAR=$(ls -1 target/*-jar-with-dependencies.jar | head -n1)
-          else
-            JAR=$(ls -1 target/*.jar | head -n1)
-          fi
-          echo "Using: $JAR"
-          mv "$JAR" "target/${APP_NAME}.jar"
-
-      - name: Build DMG (Intel)
-        run: |
-          jpackage \
-            --name "${APP_NAME}" \
-            --input target \
-            --main-jar "${APP_NAME}.jar" \
-            --main-class "${MAIN_CLASS}" \
-            --type dmg \
-            --dest output \
-            --icon src/main/resources/img/appicon.icns \
-            --java-options "-Xmx512m"
-
-      - name: Upload Intel DMG
-        uses: softprops/action-gh-release@v1
-        with:
-          files: output/*.dmg
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # ------------------------------------------------------------
-  # 2) macOS ARM (M1/M2/M3)
-  # ------------------------------------------------------------
-  macos-arm:
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup JDK 21 (ARM)
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-          architecture: aarch64
-
-      - name: Build with Maven
-        run: mvn -B -DskipTests package
-
-      - name: Debug target directory
-        run: ls -la target || true
-
-      - name: Locate & rename JAR
-        run: |
-          echo "Files in target/:"
-          ls -la target || true
-          if ls target/*-jar-with-dependencies.jar 1> /dev/null 2>&1; then
-            JAR=$(ls -1 target/*-jar-with-dependencies.jar | head -n1)
-          else
-            JAR=$(ls -1 target/*.jar | head -n1)
-          fi
-          echo "Using: $JAR"
-          mv "$JAR" "target/${APP_NAME}.jar"
-
-      - name: Build DMG (ARM)
-        run: |
-          jpackage \
-            --name "${APP_NAME}" \
-            --input target \
-            --main-jar "${APP_NAME}.jar" \
-            --main-class "${MAIN_CLASS}" \
-            --type dmg \
-            --dest output \
-            --icon src/main/resources/img/appicon.icns \
-            --java-options "-Xmx512m"
-
-      - name: Upload ARM DMG
-        uses: softprops/action-gh-release@v1
-        with:
-          files: output/*.dmg
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # ------------------------------------------------------------
-  # 3) Linux TAR distribution
-  # ------------------------------------------------------------
-  linux:
+  ###########################################
+  # LINUX BUILD (.deb or .rpm optional later)
+  ###########################################
+  build-linux:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup JDK 21
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Build with Maven
-        run: mvn -B -DskipTests package
+      - name: Build JAR
+        run: mvn -B package --file pom.xml
 
-      - name: Debug target directory
-        run: ls -la target || true
-
-      - name: Locate & rename JAR
+      - name: Locate & rename JAR (Linux)
         run: |
           echo "Files in target/:"
           ls -la target || true
-          if ls target/*-jar-with-dependencies.jar 1> /dev/null 2>&1; then
+
+          # Prefer shaded jar
+          if ls target/*-jar-with-dependencies.jar 1>/dev/null 2>&1; then
             JAR=$(ls -1 target/*-jar-with-dependencies.jar | head -n1)
           else
             JAR=$(ls -1 target/*.jar | head -n1)
           fi
-          echo "Using: $JAR"
-          mv "$JAR" "target/${APP_NAME}.jar"
 
-      - name: Build Linux archive
-        run: |
-          jpackage \
-            --name "${APP_NAME}" \
-            --input target \
-            --main-jar "${APP_NAME}.jar" \
-            --main-class "${MAIN_CLASS}" \
-            --type app-image \
-            --dest output \
-            --java-options "-Xmx512m"
+          echo "Found JAR: $JAR"
 
-          cd output
-          tar -czf "${APP_NAME}-linux.tar.gz" "${APP_NAME}.app" || \
-          tar -czf "${APP_NAME}-linux.tar.gz" "${APP_NAME}" 
+          # Conditional rename
+          if [ "$JAR" != "target/${APP_NAME}.jar" ]; then
+            mv "$JAR" "target/${APP_NAME}.jar"
+            echo "Renamed to ${APP_NAME}.jar"
+          else
+            echo "JAR already named correctly, skipping rename."
+          fi
 
-      - name: Upload Linux TAR
-        uses: softprops/action-gh-release@v1
+      - name: Prepare output directory
+        run: mkdir -p $OUTPUT_DIR
+
+      - name: Place installer artifact
+        run: cp target/${APP_NAME}.jar $OUTPUT_DIR/${APP_NAME}-linux.jar
+
+      - uses: actions/upload-artifact@v3
         with:
-          files: output/*.tar.gz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: aura-linux-jar
+          path: ${{ env.OUTPUT_DIR }}/*
 
-  # ------------------------------------------------------------
-  # 4) Windows EXE
-  # ------------------------------------------------------------
-  windows:
+
+  ###########################################
+  # WINDOWS BUILD (.exe)
+  ###########################################
+  build-windows:
     runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup JDK 21
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Build with Maven
-        run: mvn -B -DskipTests package
+      - name: Build JAR
+        run: mvn -B package --file pom.xml
 
-      - name: Debug target directory
-        run: ls -la target || true
-        shell: bash
-
-      - name: Locate & rename JAR
+      - name: Rename JAR (Windows)
         shell: pwsh
         run: |
-          Write-Host "Files in target:"
-          Get-ChildItem target -File | ForEach-Object { $_.Name }
-          $shaded = Get-ChildItem target -Filter "*-jar-with-dependencies.jar" -File | Select-Object -First 1
-          if ($shaded) {
-            $jar = $shaded.FullName
-          } else {
-            $jar = (Get-ChildItem target -Filter "*.jar" -File | Select-Object -First 1).FullName
-          }
-          if (-not $jar) {
-            throw "No JAR found in target/"
-          }
-          Rename-Item -Path $jar -NewName ("${env:APP_NAME}.jar")
+          $jar = Get-ChildItem "target" -Filter "*jar-with-dependencies.jar" -ErrorAction SilentlyContinue | Select-Object -First 1
 
-      - name: Build EXE
-        shell: pwsh
+          if (-not $jar) {
+            $jar = Get-ChildItem "target" -Filter "*.jar" | Select-Object -First 1
+          }
+
+          echo "Found JAR: $($jar.FullName)"
+
+          if ($jar.Name -ne "${env:APP_NAME}.jar") {
+            Rename-Item $jar.FullName "${env:APP_NAME}.jar"
+          }
+
+      - name: Build EXE with jpackage
         run: |
           jpackage `
+            --type exe `
             --name "${env:APP_NAME}" `
             --input target `
-            --main-jar "${env:APP_NAME}.jar" `
+            --main-jar "${env:MAIN_JAR}" `
             --main-class "${env:MAIN_CLASS}" `
-            --type exe `
-            --dest output `
-            --win-menu `
+            --win-dir-chooser `
             --win-shortcut `
-            --win-dir-chooser
+            --win-menu `
+            --dest "${env:OUTPUT_DIR}"
 
-      - name: Upload EXE
+      - uses: actions/upload-artifact@v3
+        with:
+          name: aura-windows-exe
+          path: ${{ env.OUTPUT_DIR }}/*
+
+
+  ###########################################
+  # macOS ARM (Apple Silicon)
+  ###########################################
+  macos-arm:
+    runs-on: macos-14   # ARM64 runner
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build JAR
+        run: mvn -B package --file pom.xml
+
+      - name: Rename JAR (macOS ARM)
+        run: |
+          if ls target/*jar-with-dependencies.jar 1>/dev/null 2>&1; then
+            JAR=$(ls -1 target/*jar-with-dependencies.jar | head -n1)
+          else
+            JAR=$(ls -1 target/*.jar | head -n1)
+          fi
+
+          if [ "$(basename $JAR)" != "${APP_NAME}.jar" ]; then
+            mv "$JAR" "target/${APP_NAME}.jar"
+          fi
+
+      - name: Create DMG (ARM)
+        run: |
+          jpackage \
+            --type dmg \
+            --name "$APP_NAME" \
+            --input target \
+            --main-jar "$MAIN_JAR" \
+            --main-class "$MAIN_CLASS" \
+            --icon src/main/resources/img/appicon.icns \
+            --dest "$OUTPUT_DIR"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: aura-macos-arm
+          path: ${{ env.OUTPUT_DIR }}/*
+
+
+  ###########################################
+  # macOS INTEL
+  ###########################################
+  macos-intel:
+    runs-on: macos-13   # Intel runner (x86_64)
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build JAR
+        run: mvn -B package --file pom.xml
+
+      - name: Rename JAR (macOS Intel)
+        run: |
+          if ls target/*jar-with-dependencies.jar 1>/dev/null 2>&1; then
+            JAR=$(ls -1 target/*jar-with-dependencies.jar | head -n1)
+          else
+            JAR=$(ls -1 target/*.jar | head -n1)
+          fi
+
+          if [ "$(basename $JAR)" != "${APP_NAME}.jar" ]; then
+            mv "$JAR" "target/${APP_NAME}.jar"
+          fi
+
+      - name: Create DMG (Intel)
+        run: |
+          jpackage \
+            --type dmg \
+            --name "$APP_NAME" \
+            --input target \
+            --main-jar "$MAIN_JAR" \
+            --main-class "$MAIN_CLASS" \
+            --icon src/main/resources/img/appicon.icns \
+            --dest "$OUTPUT_DIR"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: aura-macos-intel
+          path: ${{ env.OUTPUT_DIR }}/*
+
+
+  ###########################################
+  # CREATE RELEASE & UPLOAD ALL FILES
+  ###########################################
+  release:
+    needs: [build-linux, build-windows, macos-arm, macos-intel]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          path: ${{ env.OUTPUT_DIR }}
+
+      - name: List output files
+        run: ls -R $OUTPUT_DIR
+
+      - name: Create Release with Assets
         uses: softprops/action-gh-release@v1
         with:
-          files: output/*.exe
+          files: ${{ env.OUTPUT_DIR }}/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
