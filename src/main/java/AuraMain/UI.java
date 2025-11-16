@@ -1,6 +1,6 @@
 package AuraMain;
 
-import UI.EchoFrame;
+import UI.AuraFrame;
 import UI.FileListPanel;
 import UI.MetadataPanel;
 import UI.PrimaryButtonPanel;
@@ -17,7 +17,7 @@ import UI.ProgressFrame;
 @SuppressWarnings("unused")
 public class UI {
     private static JFrame mainFrame;
-        public static EchoFrame echoFrame;
+        public static AuraFrame echoFrame;
 	    public static FileListPanel filePanel;
         public static MetadataPanel metadataPanel;
         public static PrimaryButtonPanel buttonPanel;

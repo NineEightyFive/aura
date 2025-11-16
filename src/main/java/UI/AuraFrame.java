@@ -15,12 +15,12 @@ import java.util.HashSet;
  * @author Dan Bennett-Jeffreys
  */
 @SuppressWarnings("unused")
-public class EchoFrame extends JFrame{
+public class AuraFrame extends JFrame{
     private PrimaryButtonPanel buttonPanel;
     private MetadataPanel mdPanel;
     private FileListPanel listPanel;
     
-    public EchoFrame(){ //Default Audio Tags, for use with JAudioTagger
+    public AuraFrame(){ //Default Audio Tags, for use with JAudioTagger
         String[] metadataKeys = {
             "TITLE",
             "ARTIST",

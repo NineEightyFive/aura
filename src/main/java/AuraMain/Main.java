@@ -1,21 +1,21 @@
 package AuraMain;
 
-import UI.EchoFrame;
+import UI.AuraFrame;
 import UI.MetadataPanel;
 
 import javax.swing.JFrame;
 
 @SuppressWarnings("unused")
 public class Main {
-    private static EchoFrame ef;
+    private static AuraFrame ef;
     /**
      * Initialization Function for EchoMaster, runs and sets the window up
      */
     public static void init() {
         // Run initialization of program, start UI, etc.
-        ef = new EchoFrame();
+        ef = new AuraFrame();
         ef.setSize(550, 400);
-        ef.setTitle("Echo Master");
+        ef.setTitle("AURA");
         ef.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ef.setVisible(true);
         UI.setMainFrame(ef);
