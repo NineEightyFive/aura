@@ -160,6 +160,8 @@ jobs:
             --main-class "$MAIN_CLASS" \
             --icon src/main/resources/img/appicon.icns \
             --dest "$OUTPUT_DIR"
+          
+          mv "$OUTPUT_DIR/$APP_NAME-1.0.dmg" "$OUTPUT_DIR/${APP_NAME}-macos-arm64.dmg"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -207,6 +209,8 @@ jobs:
             --main-class "$MAIN_CLASS" \
             --icon src/main/resources/img/appicon.icns \
             --dest "$OUTPUT_DIR"
+          
+          mv "$OUTPUT_DIR/$APP_NAME-1.0.dmg" "$OUTPUT_DIR/${APP_NAME}-macos-x64.dmg"
 
       - uses: actions/upload-artifact@v4
         with:
