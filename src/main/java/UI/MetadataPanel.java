@@ -84,7 +84,7 @@ public final class MetadataPanel extends JPanel{
         inputValues = new HashMap<>();
         outputValues = new HashMap<>();
         setKeyset(new HashSet<>());
-        this.setBackground(new Color(236,220,118));
+        this.setBackground(new Color(96, 30, 193));
     }
     
     
@@ -102,11 +102,12 @@ public final class MetadataPanel extends JPanel{
             label = new JLabel(key);
             label.setMinimumSize(new Dimension(80,20));
             label.setBorder(new EmptyBorder(10, 10, 10, 10));
+            label.setForeground(Color.white);
             valueBox = new JComboBox<>(defaultChoices);
             valueBox.setEditable(true);
             valueBox.addActionListener(new MetadataComboBoxListener(key));
             valueBox.setMaximumSize(new Dimension(160,20));
-            this.setBackground(new Color(236,220,118));
+            this.setBackground(new Color(96, 30, 193));
             this.add(label);
             this.add(valueBox);
         }

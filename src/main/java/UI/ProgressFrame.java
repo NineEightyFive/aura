@@ -14,6 +14,8 @@ public class ProgressFrame extends JDialog{
         setSize(400,150);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(96, 30, 193));
+        setForeground(Color.white);
 
         status = new JLabel("Converting Files", SwingConstants.CENTER);
         progress = new JProgressBar(0, 100);

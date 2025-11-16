@@ -26,12 +26,14 @@ public class FileListPanel extends JPanel{
     private JList<String> fileList;
     private DefaultListModel<String> fileListModel;
     public FileListPanel(){
-        this.setBackground(new Color(236,220,118));
+        this.setBackground(new Color(96, 30, 193));
         fileListModel = new DefaultListModel<>();
         fileList = new JList<>(fileListModel);
         fileList.addListSelectionListener(new FileListSelectionListener());
         listPane = new JScrollPane(fileList);
         listPane.setPreferredSize(new Dimension(240,180));
+        fileList.setBackground(new Color(129, 116, 159));
+        fileList.setForeground(Color.white);
         this.add(listPane);
     }
     

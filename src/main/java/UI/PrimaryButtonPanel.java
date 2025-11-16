@@ -118,23 +118,23 @@ public class PrimaryButtonPanel extends JPanel {
         jLabel1 = new javax.swing.JLabel();
         jStart = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(236, 220, 118));
+        setBackground(new java.awt.Color(96,30,193));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(300, 200));
 
-        jAddFile.setBackground(new java.awt.Color(204, 255, 204));
+        jAddFile.setBackground(new java.awt.Color(3, 143, 3));
         jAddFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addfile.png"))); // NOI18N
         jAddFile.setToolTipText("Add File");
 
-        jRmvFile.setBackground(new java.awt.Color(255, 204, 204));
+        jRmvFile.setBackground(new java.awt.Color(168, 0, 0));
         jRmvFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/removefile.png"))); // NOI18N
         jRmvFile.setToolTipText("Remove File");
 
-        jAddFldr.setBackground(new java.awt.Color(204, 255, 204));
+        jAddFldr.setBackground(new java.awt.Color(166, 60, 231));
         jAddFldr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folderadd.png"))); // NOI18N
         jAddFldr.setToolTipText("Add Folder");
 
-        jClrAll.setBackground(new java.awt.Color(255, 204, 204));
+        jClrAll.setBackground(new java.awt.Color(166, 60, 231));
         jClrAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deleteall.png"))); // NOI18N
         jClrAll.setToolTipText("Clear File List");
 
@@ -155,7 +155,7 @@ public class PrimaryButtonPanel extends JPanel {
 
         jLabel1.setText("Format");
 
-        jStart.setBackground(new java.awt.Color(102, 204, 255));
+        jStart.setBackground(new java.awt.Color(166, 60, 231));
         jStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/start.png"))); // NOI18N
         jStart.setToolTipText("Convert Files");
 
