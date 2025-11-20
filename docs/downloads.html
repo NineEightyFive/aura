@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Downloads - AURA</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script>
+async function setDownloadLinks() {
+    const url = "https://api.github.com/repos/nineeightyfive/aura/releases/latest";
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const assets = data.assets || [];
+
+        function findAsset(keyword, ext) {
+            return assets.find(a =>
+                a.name.toLowerCase().includes(keyword.toLowerCase()) &&
+                (ext ? a.name.toLowerCase().endsWith(ext) : true)
+            );
+        }
+
+        // Detect assets
+        const winAsset = findAsset("win", ".exe") || findAsset(".exe");
+        const macArmAsset = findAsset("arm64") || findAsset("aarch64");
+        const macIntelAsset = findAsset("x64") || findAsset("intel");
+        const linuxAsset = findAsset("appimage") || findAsset("linux");
+
+        // Assign URLs (if found)
+        if (winAsset) document.getElementById("win").href = winAsset.browser_download_url;
+        if (macArmAsset) document.getElementById("macARM").href = macArmAsset.browser_download_url;
+        if (macIntelAsset) document.getElementById("macX64").href = macIntelAsset.browser_download_url;
+        if (linuxAsset) document.getElementById("linux").href = linuxAsset.browser_download_url;
+
+    } catch (err) {
+        console.error("Error pulling release info:", err);
+    }
+}
+
+setDownloadLinks();
+</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>Downloads</h1>
+						<p>AURA</p>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main special">
+								<p>Select the appropriate option for your computer's operating system<br>The mac ARM64 release is
+								for Macs with Apple M-Series processors. x64 is for older Macs that use Intel processors.</p>
+								<ul class="actions stacked">
+													<li><a id="win" class="button primary">Windows</a></li>
+													<li><a id="macARM" class="button">macOS (ARM64)</a></li>
+													<li><a id="macX64" class="button">macOS (x64)</a></li>
+													<li><a id="linux" class="button">Linux</a></li>
+												</ul>
+								
+								</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>AURA</h2>
+							<p>AURA is a project by Owain Lucas forked off the existing project EchoMaster. AURA adds additional features and
+							efficency changes to make it suitable for public distribution. AURA was built and designed at Landmark College in Putney, VT.</p>
+							<ul class="actions">
+								<li><a href="downloads.html" class="button">Download AURA</a></li>
+							</ul>
+						</section>
+						<section>
+							<h2>Contact</h2>
+							<dl class="alt">
+								<dt>Address</dt>
+								<dd>19 River Road South &bull; Putney, VT 05346 &bull; USA</dd>
+								<dt>Phone</dt>
+								<dd>(802) 387-7120</dd>
+								<dt>Email</dt>
+								<dd><a href="#">owain@nineeightyfive.com</a></dd>
+							</dl>
+							<ul class="icons">
+								<li><a href="https://nineeightyfive.com" class="icon brands fa-globe-americas alt"><span class="label">Website</span></a></li>
+								<li><a href="https://github.com/NineEightyFive" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+							</ul>
+						</section>
+						<p class="copyright">&copy;2025 NineEightyFive. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

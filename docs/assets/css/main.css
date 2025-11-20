@@ -1,4 +1,4 @@
-@import url(fontawesome-all.min.css);
+/*@import url(fontawesome-all.min.css);*/
 @import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400';
 
 /*
@@ -99,11 +99,11 @@ input, select, textarea {
 	}
 
 	body {
-		background-color: #935d8c;
-		background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+		background: #842a9b;
+		background: -webkit-linear-gradient(130deg,rgba(132, 42, 155, 1) 0%, rgba(224, 140, 255, 1) 100%);
+		background: -moz-linear-gradient(130deg,rgba(132, 42, 155, 1) 0%, rgba(224, 140, 255, 1) 100%);
+		background: linear-gradient(130deg,rgba(132, 42, 155, 1) 0%, rgba(224, 140, 255, 1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#842A9B",endColorstr="#E08CFF",GradientType=0);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -2252,7 +2252,7 @@ input, select, textarea {
 		}
 
 		.icon.brands:before {
-			font-family: 'Font Awesome 5 Brands';
+			font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
 		}
 
 		.icon.major {
